@@ -14,16 +14,11 @@
                                        title="přeci OpenStreetMapy :-)" class="osmlogo">!</h1>
 
             <p class="lead">OpenStreetMap je mapa, kterou může kdokoliv upravovat. Něco jako Wikipedie. Česká
-                <a href="/komunita">komunita</a> Vám zde nabízí mapovou aplikaci, své <a href="/projekty">projekty</a>, odborníky
-                či&nbsp;<a href="/skoleni">školení</a>.</p>
-
-            <p style="font-size:85%;">Tento web je veřejná beta-verze od <a href="/talkcz/c1491">1/2016</a>,
-                občasný vývoj na <a href="https://github.com/osmcz/osmcz"><img
-                            src="https://github.com/favicon.ico" width="13"
-                            style="margin:0 4px" alt="">githubu</a>.</p>
+                <a href="/komunita">komunita</a> Vám zde nabízí mapovou aplikaci, své <a href="/projekty">projekty</a>.
+            </p>
 
             <p><a href="/vyuziti" class="btn btn-primary btn-large">Zjistit více o OSM</a>
-                <a href="/galerie" class="btn btn-large">Prohlédnout galerii</a></p>
+            </p>
         </div>
     </div>
 
@@ -31,10 +26,9 @@
         <div class="row">
 
             <div class="content-box-left col-md-4 col-md-offset-2">
-                <div class="content-box-inner bottom-spacer">
-                    <h2>Tweety <a href="https://twitter.com/intent/follow?screen_name=osmcz"
-                                  class="btn btn-link twitter-follow">Sledovat @osmcz</a></h2>
-                    {$presenter[TwitterPlugin]->write('twitter')}
+                {var $splash = PagesModel::getPageById(29)}
+                <div class="content-box-inner bottom-spacer" n:if="$splash->getMeta('show_content')">
+                    {!$splash->content}
                 </div>
 
                 <div class="content-box-inner">
@@ -51,11 +45,6 @@
             </div>
 
             <div class="content-box-right col-md-4">
-                <div class="content-box-inner bottom-spacer">
-                    <h2>Český týdeník</h2>
-                    {$presenter[TwitterPlugin]->write('weekly')}
-                </div>
-
                 <div class="content-box-inner bottom-spacer">
                     <h2>Konference</h2>
 
@@ -81,35 +70,6 @@
                     </p>
 
                 </div>
-
-                {var $splash = PagesModel::getPageById(29)}
-                <div class="content-box-inner bottom-spacer" n:if="$splash->getMeta('show_content')">
-                    {!$splash->content}
-                </div>
-
-                <div class="content-box-inner">
-                    <h2>Newsletter</h2>
-
-                    <p>Občasné info o dění v komunitě - méně než 1× za čtvrtrok. Zde <a href="/newsletter">archiv</a>.
-                    </p>
-
-                    <form action="//zby.us11.list-manage.com/subscribe/post?u=cb9a83e4c66e393586b89e370&amp;id=81b42f6aac"
-                          method="post" target="_blank">
-                        <div class="input-group">
-                            <input type="email" value="" name="EMAIL" placeholder="email" required
-                                   class="form-control input-sm">
-                              <span class="input-group-btn">
-                                <input type="submit" value="Přihlásit" name="subscribe" class="btn btn-sm btn-default">
-                              </span>
-                        </div>
-                        <!-- /input-group -->
-                        <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-                        <div style="position: absolute; left: -5000px;"><input type="text" name="b_cb9a83e4c66e393586b89e370_81b42f6aac" tabindex="-1" value=""></div>
-                    </form>
-                    <p>&nbsp;</p>
-
-                </div>
-
 
             </div>
 

@@ -20,21 +20,21 @@
     <!-- Custom styles for this template -->
     <link href="{!'/theme/css/style.css'|modified}" rel="stylesheet">
 
-    <meta property="og:image" content="{block fb_image}https://openstreetmap.cz/theme/img/mail-template.v2.png{/block}">
+    <meta property="og:image" content="{block fb_image}https://openstreetmap.ba/theme/img/mail-template.v2.png{/block}">
 </head>
 
 <body>
 
 <div id="modal-container"></div>
 
-<div n:if="$_SERVER['HTTP_HOST'] != 'openstreetmap.cz'" class="alert alert-warning" style="position:fixed;bottom:10px;z-index:9999;right:10px;padding:3px;">
+<div n:if="$_SERVER['HTTP_HOST'] != 'openstreetmap.ba'" class="alert alert-warning" style="position:fixed;bottom:10px;z-index:9999;right:10px;padding:3px;">
     <strong>POZOR!</strong>
     Toto je <a href="https://github.com/osmcz/osmcz-web">testovací web OSMCZ</a>
     {!str_replace('HEAD is now at ', '<br>', @file_get_contents(WWW_DIR . '/commit.txt'))}
     <br>
     <br>
     Pro ostrou verzi, prosím, přejděte <br>
-    na <a href="https://openstreetmap.cz">openstreetmap.cz</a>.
+    na <a href="https://openstreetmap.ba">openstreetmap.ba</a>.
     <button class="close close-overlay" onclick="$(this).parent().hide()">&times;</button>
 </div>
 
@@ -50,9 +50,9 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/" title="Přejít na úvodní stránku OpenStreetMap.cz">
+            <a class="navbar-brand" href="/" title="Přejít na úvodní stránku OpenStreetMap.ba">
                 <img src="/theme/img/osmcz.60x60.png" width="30" height="30" alt="Logo OSMCZ">
-                <span>{($_SERVER['HTTP_HOST'] == 'openstreetmap.cz' ? 'OpenStreetMap.cz' : $_SERVER['HTTP_HOST'])}</span>
+                <span>{($_SERVER['HTTP_HOST'] == 'openstreetmap.ba' ? 'OpenStreetMap.ba' : $_SERVER['HTTP_HOST'])}</span>
             </a>
 
             <div id="page-restore-button" title="Ukázat stránku"></div>

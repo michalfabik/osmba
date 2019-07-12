@@ -326,32 +326,18 @@ osmcz.layers = function (map, baseLayers, overlays, controls) {
     baseLayers["Základní"]["Méně popisků"] = menepopisku;
     baseLayers["Základní"]["Wikimedia Map"] = wikimediamap;
 
-    // Ortofoto group
-    baseLayers["Letecké"] = {};
-    baseLayers["Letecké"]["Ortofoto ČÚZK"] = ortofoto;
-    baseLayers["Letecké"]["Praha - IPR last"] = ipr_last;
-    baseLayers["Letecké"]["Praha - IPR vegetační půst"] = ipr_vege;
-
-    overlays["Letecké"] = {};
-    overlays["Letecké"]["Ortofoto popisky"] = ortofotoOverlay;
-
     // Information group
     baseLayers["Informace"] = {};
     overlays["Informace"] = {};
-    overlays["Informace"]["Aktivní vrstva"] = new osmcz.activeLayer(map);
     overlays["Informace"]["OSM poznámky"] = new osmcz.osmNotesLayer();
-
 
     // Hiking group
     baseLayers["Turistické"] = {};
-    baseLayers["Turistické"]["Turistická mapa (ČR)"] = turisticka;
     baseLayers["Turistické"]["Cyklo+turistická (EU)"] = mtb;
     baseLayers["Turistické"]["Hikebikemap.org"] = hikebike;
 
     overlays["Turistické"] = {};
     overlays["Turistické"]["Turistické trasy ČR"] = turistikaOverlay;
-    overlays["Turistické"]["Turistické trasy EU"] = lonviaHikingOverlay;
-    overlays["Turistické"]["Vrstevnice ČR"] = vrstevniceOverlay;
 
     // Sport group
     baseLayers["Sport"] = {};
@@ -375,21 +361,4 @@ osmcz.layers = function (map, baseLayers, overlays, controls) {
 
     // Special group
     overlays["Speciální"] = {};
-    overlays["Speciální"]["Katastrální mapa ČÚZK"] = katastralniMapaOverlay;
-
-// OpenInfraMap neposkytuje bitmapove dlazdice, presli na vektorove
-//    overlays["Speciální"]["Vedení vysokého napětí"] = powerOverlay;
-//    overlays["Speciální"]["Telekomunikační vysílače"] = commsOverlay;
-    overlays["Speciální"]["Pole a louky (pLPIS)"] = lpisOverlay;
-    overlays["Speciální"]["Strava - všechny sporty ČR"] = stravaAllOverlay;
-
-    // RUIAN group
-    overlays["RÚIAN"] = {};
-    overlays["RÚIAN"]["Adresy"] = ruianAdresyOverlay;
-    overlays["RÚIAN"]["Budovy"] = ruianBudovyOverlay;
-    overlays["RÚIAN"]["Budovy TODO"] = ruianBudovyTodoOverlay;
-    overlays["RÚIAN"]["Ulice"] = ruianUliceOverlay;
-    overlays["RÚIAN"]["Parcely"] = ruianParcelyOverlay;
-    overlays["RÚIAN"]["Landuse"] = ruianLanduseOverlay;
-
 };
