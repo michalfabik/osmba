@@ -1,6 +1,6 @@
 {block title}{if $x=$page->getMeta('html-title')}{$x}{else}{$page[heading]}{/if}{/block}
 {block layout_aftertitle}{if $x=$page->getMeta('html-aftertitle')}{$x}{else}{include #parent}{/if}{/block}
-{block map}{include #osmczmap}{/block}
+{block map}{include #osmbamap}{/block}
 
 {block content}
 <div class="container" n:snippet="content">
