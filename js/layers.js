@@ -337,7 +337,6 @@ osmcz.layers = function (map, baseLayers, overlays, controls) {
     baseLayers["Turistické"]["Hikebikemap.org"] = hikebike;
 
     overlays["Turistické"] = {};
-    overlays["Turistické"]["Turistické trasy ČR"] = turistikaOverlay;
 
     // Sport group
     baseLayers["Sport"] = {};
