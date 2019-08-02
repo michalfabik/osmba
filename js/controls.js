@@ -1,21 +1,21 @@
 // (c) 2016 osmcz-app, https://github.com/osmcz/osmcz
 
-var osmcz = osmcz || {};
-osmcz.controls = function (map, baseLayers, overlays, layersPanel, controls) {
+var osmba = osmba || {};
+osmba.controls = function (map, baseLayers, overlays, layersPanel, controls) {
     // -- constructor --
 
-    controls.layers = osmcz.layerSwitcher(baseLayers, overlays, layersPanel, {priorityGroups: ["Základní", 'Letecké', 'Informace']}).addTo(map);
+    controls.layers = osmba.layerSwitcher(baseLayers, overlays, layersPanel, {priorityGroups: ["Osnovni", 'Avionski', 'Informacije']}).addTo(map);
 
     controls.zoom = L.control.zoom({
-        zoomInTitle: 'Přiblížit',
-        zoomOutTitle: 'Oddálit'
+        zoomInTitle: 'Približiti',
+        zoomOutTitle: 'Udaljiti'
     }).addTo(map)
 
     // create a fullscreen button and add it to the map
     controls.fullScreen = new L.control.fullscreen({
         position: 'topleft', // change the position of the button can be topleft, topright, bottomright or bottomleft, defaut topleft
-        title: 'Na celou obrazovku', // change the title of the button, default Full Screen
-        titleCancel: 'Ukončení režimu celé obrazovky', // change the title of the button when fullscreen is on, default Exit Full Screen
+        title: 'Preko cijelog ekrana', // change the title of the button, default Full Screen
+        titleCancel: 'Izlazak iz režima cijelog ekrana', // change the title of the button when fullscreen is on, default Exit Full Screen
         content: "<span class='glyphicon glyphicon-fullscreen'></span>", // change the content of the button, can be HTML, default null
         forceSeparateButton: true, // force seperate button to detach from zoom buttons, default false
         forcePseudoFullscreen: false // force use of pseudo full screen even if full screen API is available, default false
@@ -45,14 +45,14 @@ osmcz.controls = function (map, baseLayers, overlays, layersPanel, controls) {
         locateOptions: {maxZoom: 15},
         icon: 'glyphicon glyphicon-map-marker',
         strings: {
-            title: "Zobrazit moji aktuální polohu"
+            title: "Prikazati moju trenutnu lokaciju"
         }
     }).addTo(map);
 
     // leaflet-filelayer - upload GPX, KML a GeoJSON
     var style = {color: 'red', opacity: .6, fillOpacity: .5, weight: 4, clickable: false};
     L.Control.FileLayerLoad.LABEL = '<span class="glyphicon glyphicon-folder-open"></span>';
-    L.Control.FileLayerLoad.TITLE = 'Načíst lokální soubory (GPX, KML, GeoJSON)';
+    L.Control.FileLayerLoad.TITLE = 'Učitati lokalne fajlove (GPX, KML, GeoJSON)';
 
     // TODO:
     //  * show more details about file like distance, duration, elevation...
@@ -76,12 +76,12 @@ osmcz.controls = function (map, baseLayers, overlays, layersPanel, controls) {
 
     controls.fileLayerLoad.loader.on('data:loaded', function (e) {
         // Add to map layer switcher
-        var group = 'Lokální soubory';
+        var group = 'Lokalni fajlovi';
         if (!controls.layers.layerExists(e.filename)) {
             e.layer.options.basic = true;
             e.layer.options.removeBtn = true;
             controls.layers.addOverlay(e.layer, e.filename, group);
-            toastr.success('Soubor ' + e.filename + ' byl úspěšně načten.', '', {
+            toastr.success('Fajl ' + e.filename + ' je uspješno učitan.', '', {
                 closeButton: true,
                 positionClass: "toast-bottom-center"
             });
@@ -92,7 +92,7 @@ osmcz.controls = function (map, baseLayers, overlays, layersPanel, controls) {
             }
             controls.layers._expand();
         } else {
-            toastr.error('Soubor nelze načíst podruhé.', 'Chyba', {
+            toastr.error('Fajl nije moguće učitati ponovo.', 'Greška', {
                 closeButton: true,
                 positionClass: "toast-bottom-center"
             });
@@ -101,7 +101,7 @@ osmcz.controls = function (map, baseLayers, overlays, layersPanel, controls) {
     });
 
     controls.fileLayerLoad.loader.on('data:error', function (e) {
-        toastr.error('Soubor se nepodařilo načíst.<br>(<i>' + e.error.message + '</i>)', 'Chyba', {
+        toastr.error('Nije bilo moguće učitati fajl.<br>(<i>' + e.error.message + '</i>)', 'Greška', {
             closeButton: true,
             positionClass: "toast-bottom-center"
         });

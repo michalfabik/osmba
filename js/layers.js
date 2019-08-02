@@ -1,7 +1,7 @@
 // (c) 2016 osmcz-app, https://github.com/osmcz/osmcz
 
-var osmcz = osmcz || {};
-osmcz.layers = function (map, baseLayers, overlays, controls) {
+var osmba = osmba || {};
+osmba.layers = function (map, baseLayers, overlays, controls) {
     // -- constructor --
 
     var devicePixelRatio = window.devicePixelRatio || 1,
@@ -42,7 +42,7 @@ osmcz.layers = function (map, baseLayers, overlays, controls) {
         attribution: osmAttr + ', <a href="https://www.mediawiki.org/wiki/Maps">Wikimedia</a>',
         code: 'w',
         basic: true,
-        osmczDefaultLayer: true,
+        osmbaDefaultLayer: true,
     });
 
     var ocm = L.tileLayer("https://{s}.tile.thunderforest.com/cycle/{z}/{x}/{y}" + retinaSuffix + ".png?apikey=" + thunderforestAPIkey, {
@@ -59,20 +59,20 @@ osmcz.layers = function (map, baseLayers, overlays, controls) {
     });
 
 
-    var hikebike = L.tileLayer(osmcz.fakeHttps + "{s}.tiles.wmflabs.org/hikebike/{z}/{x}/{y}.png", {
+    var hikebike = L.tileLayer(osmba.fakeHttps + "{s}.tiles.wmflabs.org/hikebike/{z}/{x}/{y}.png", {
         maxZoom: 18,
         attribution: osmAttr + ', <a href="http://www.hikebikemap.org">Hike &amp; Bike Map</a>',
         code: 'h'
     });
 
-    var mtb = L.tileLayer(osmcz.fakeHttps + "tile.mtbmap.cz/mtbmap_tiles/{z}/{x}/{y}.png", {
+    var mtb = L.tileLayer(osmba.fakeHttps + "tile.mtbmap.cz/mtbmap_tiles/{z}/{x}/{y}.png", {
         maxZoom: 18,
         attribution: osmAttr + ', <a href="http://www.mtbmap.cz">mtbmap.cz</a>',
         code: 'm',
         basic: true
     });
 
-    var vodovky = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg', {
+    var akvarel = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg', {
         attribution: '&copy; CC-BY-SA <a href="https://openstreetmap.org/copyright">OSM</a>, imagery <a href="http://maps.stamen.com">Stamen Design</a>',
         maxZoom: 18,
         code: 's'
@@ -151,7 +151,7 @@ osmcz.layers = function (map, baseLayers, overlays, controls) {
 
     // automatically add/remove orotofotoOverlay
     map.on('baselayerchange', function (event) {
-        if (event.layer == ortofoto || event.layer == vodovky) {
+        if (event.layer == ortofoto || event.layer == akvarel) {
             setTimeout(function () {  // needs timeout or doesn't work
                 if (!map.hasLayer(ortofotoOverlay)) {
                     map.addLayer(ortofotoOverlay);
@@ -216,7 +216,7 @@ osmcz.layers = function (map, baseLayers, overlays, controls) {
         code: 'V'
     });
 
-    var zimniOverlay = L.tileLayer("https://www.opensnowmap.org/tiles-pistes/{z}/{x}/{y}.png", {
+    var zimskiOverlay = L.tileLayer("https://www.opensnowmap.org/tiles-pistes/{z}/{x}/{y}.png", {
         maxZoom: 18,
         attribution: osmAttr + ', <a href="http://www.opensnowmap.org">opensnowmap.org</a>',
         code: 'Z',
@@ -251,7 +251,7 @@ osmcz.layers = function (map, baseLayers, overlays, controls) {
         code: 'X'
     });
 
-    var lpisOverlay = L.tileLayer.wms(osmcz.fakeHttps + 'eagri.cz/public/app/wms/plpis.fcgi', {
+    var lpisOverlay = L.tileLayer.wms(osmba.fakeHttps + 'eagri.cz/public/app/wms/plpis.fcgi', {
         layers: 'LPIS_FB4,LPIS_FB4_KOD',
         format: 'image/png',
         transparent: true,
@@ -318,46 +318,46 @@ osmcz.layers = function (map, baseLayers, overlays, controls) {
 
 
     // Base group
-    baseLayers["Základní"] = {};
-    baseLayers["Základní"]["Mapbox streets"] = mapbox;
-    baseLayers["Základní"]["OpenStreetMap Mapnik"] = osm;
-    baseLayers["Základní"]["OpenTopoMap"] = opentopomap;
-    baseLayers["Základní"]["Metropolis"] = metropolis;
-    baseLayers["Základní"]["Méně popisků"] = menepopisku;
-    baseLayers["Základní"]["Wikimedia Map"] = wikimediamap;
+    baseLayers["Osnovno"] = {};
+    baseLayers["Osnovno"]["Mapbox streets"] = mapbox;
+    baseLayers["Osnovno"]["OpenStreetMap Mapnik"] = osm;
+    baseLayers["Osnovno"]["OpenTopoMap"] = opentopomap;
+    baseLayers["Osnovno"]["Metropolis"] = metropolis;
+    baseLayers["Osnovno"]["Manje teksta"] = menepopisku;
+    baseLayers["Osnovno"]["Wikimedia Map"] = wikimediamap;
 
     // Information group
-    baseLayers["Informace"] = {};
-    overlays["Informace"] = {};
-    overlays["Informace"]["OSM poznámky"] = new osmcz.osmNotesLayer();
+    baseLayers["Informacije"] = {};
+    overlays["Informacije"] = {};
+    overlays["Informacije"]["OSM napomene"] = new osmba.osmNotesLayer();
 
     // Hiking group
-    baseLayers["Turistické"] = {};
-    baseLayers["Turistické"]["Cyklo+turistická (EU)"] = mtb;
-    baseLayers["Turistické"]["Hikebikemap.org"] = hikebike;
+    baseLayers["Turizam"] = {};
+    baseLayers["Turizam"]["Biciklizam+pješačenje (EU)"] = mtb;
+    baseLayers["Turizam"]["Hikebikemap.org"] = hikebike;
 
-    overlays["Turistické"] = {};
+    overlays["Turizam"] = {};
 
     // Sport group
     baseLayers["Sport"] = {};
     baseLayers["Sport"]["OpenCycleMap"] = ocm;
 
     overlays["Sport"] = {};
-    overlays["Sport"]["Cyklistické trasy EU"] = lonviaCyclingOverlay;
-    overlays["Sport"]["Zimní sporty"] = zimniOverlay;
+    overlays["Sport"]["Biciklističke trase EU"] = lonviaCyclingOverlay;
+    overlays["Sport"]["Zimski sportovi"] = zimskiOverlay;
 
     // Transport group
-    baseLayers["Dopravní"] = {};
-    baseLayers["Dopravní"]["Dopravní"] = dopravni;
-    baseLayers["Dopravní"]["Dopravní öpnv"] = opnv;
+    baseLayers["Saobraćaj"] = {};
+    baseLayers["Saobraćaj"]["Saobraćaj"] = dopravni;
+    baseLayers["Saobraćaj"]["Saobraćaj öpnv"] = opnv;
 
     // Efects group
-    baseLayers["Efektní"] = {};
-    baseLayers["Efektní"]["Vodovky"] = vodovky;
-    baseLayers["Efektní"]["Toner"] = toner;
-    baseLayers["Efektní"]["Spinal"] = spinal;
-    baseLayers["Efektní"]["Pioneer"] = pioneer;
+    baseLayers["Efekti"] = {};
+    baseLayers["Efekti"]["Akvarel"] = akvarel;
+    baseLayers["Efekti"]["Toner"] = toner;
+    baseLayers["Efekti"]["Spinal"] = spinal;
+    baseLayers["Efekti"]["Pioneer"] = pioneer;
 
     // Special group
-    overlays["Speciální"] = {};
+    overlays["Specijalizirani"] = {};
 };

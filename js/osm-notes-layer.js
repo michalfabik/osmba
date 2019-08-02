@@ -1,7 +1,7 @@
 // from https://github.com/osmlab/leaflet-osm-notes/tree/3fa2138133724e4cf5816e7fa7ece9da6fafc135
 
-var osmcz = osmcz || {};
-osmcz.osmNotesLayer = L.LayerGroup.extend({
+var osmba = osmba || {};
+osmba.osmNotesLayer = L.LayerGroup.extend({
 
     API: 'https://api.openstreetmap.org/api/0.6/notes.json?closed=3&bbox=',
 
@@ -81,7 +81,7 @@ osmcz.osmNotesLayer = L.LayerGroup.extend({
         p['marker-color'] = {closed: '95c055', open: 'ca3029'}[p.status];
         p['marker-symbol'] = {closed: 'circle-stroked', open: 'cross'}[p.status];
 
-        p.title = (p.status == 'closed' ? 'Vyřešená poznámka' : 'Poznámka') + ' <a href="http://www.openstreetmap.org/browse/note/' + p.id + '">#' + p.id + '</a>';
+        p.title = (p.status == 'closed' ? 'Riješena napomena' : 'Napomena') + ' <a href="http://www.openstreetmap.org/browse/note/' + p.id + '">#' + p.id + '</a>';
         p.description = '';
 
         for (var i = 0; i < p.comments.length; i++) {

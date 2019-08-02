@@ -1,6 +1,6 @@
 /*
- guideposts for osmcz
- Javascript code for openstreetmap.cz website
+ guideposts for osmba
+ Javascript code for openstreetmap.ba website
  Copyright (C) 2015-2018 Michal Grézl and others (see https://github.com/osmcz/osmcz/ contributors)
 
  This program is free software: you can redistribute it and/or modify
@@ -22,8 +22,8 @@ and
 
 */
 
-var osmcz = osmcz || {};
-osmcz.guideposts = function (map, baseLayers, overlays, controls, group) {
+var osmba = osmba || {};
+osmba.guideposts = function (map, baseLayers, overlays, controls, group) {
 
     var layersControl = controls.layers;
     var photoDBbtn = null;
@@ -55,74 +55,74 @@ osmcz.guideposts = function (map, baseLayers, overlays, controls, group) {
 
 
     var gp_foot_icon = L.icon({
-        iconUrl: osmcz.basePath + "img/gp/guidepost.png",
+        iconUrl: osmba.basePath + "img/gp/guidepost.png",
         iconSize: [48, 48],
         iconAnchor: [23, 45]
     });
 
     var gp_cycle_icon = L.icon({
-        iconUrl: osmcz.basePath + "img/gp/cycle.png",
+        iconUrl: osmba.basePath + "img/gp/cycle.png",
         iconSize: [48, 48],
         iconAnchor: [23, 45]
     });
 
     var gp_cycle_foot_icon = L.icon({
-        iconUrl: osmcz.basePath + "img/gp/cycle_foot.png",
+        iconUrl: osmba.basePath + "img/gp/cycle_foot.png",
         iconSize: [48, 48],
         iconAnchor: [23, 45]
     });
 
     var gp_ski_icon = L.icon({
-        iconUrl: osmcz.basePath + "img/gp/ski.png",
+        iconUrl: osmba.basePath + "img/gp/ski.png",
         iconSize: [48, 48],
         iconAnchor: [23, 45]
     });
 
     var gp_ski_foot_icon = L.icon({
-        iconUrl: osmcz.basePath + "img/gp/ski_foot.png",
+        iconUrl: osmba.basePath + "img/gp/ski_foot.png",
         iconSize: [48, 48],
         iconAnchor: [23, 45]
     });
 
     var infopane_icon = L.icon({
-        iconUrl: osmcz.basePath + "img/gp/infopane.png",
+        iconUrl: osmba.basePath + "img/gp/infopane.png",
         iconSize: [48, 48],
         iconAnchor: [23, 45]
     });
 
     var map_icon = L.icon({
-        iconUrl: osmcz.basePath + "img/gp/map.png",
+        iconUrl: osmba.basePath + "img/gp/map.png",
         iconSize: [48, 48],
         iconAnchor: [23, 45]
     });
 
     var blurred_icon = L.icon({
-        iconUrl: osmcz.basePath + "img/gp/blurred.png",
+        iconUrl: osmba.basePath + "img/gp/blurred.png",
         iconSize: [48, 48],
         iconAnchor: [23, 45]
     });
 
     var emergency_icon = L.icon({
-        iconUrl: osmcz.basePath + "img/gp/emergency_point.png",
+        iconUrl: osmba.basePath + "img/gp/emergency_point.png",
         iconSize: [48, 48],
         iconAnchor: [23, 45]
     });
 
     var unknown_icon = L.icon({
-        iconUrl: osmcz.basePath + "img/gp/unknown.png",
+        iconUrl: osmba.basePath + "img/gp/unknown.png",
         iconSize: [48, 48],
         iconAnchor: [23, 45]
     });
 
     var commons_icon = L.icon({
-        iconUrl: osmcz.basePath + "img/commons_logo.png",
+        iconUrl: osmba.basePath + "img/commons_logo.png",
         iconSize: [35, 48],
         iconAnchor: [17, 0]
     });
 
     //for Fody - prehledova
     var overview_icon = L.icon({
-        iconUrl: osmcz.basePath + "img/gp/overview_photo.png",
+        iconUrl: osmba.basePath + "img/gp/overview_photo.png",
         iconSize: [48, 48],
         iconAnchor: [23, 45]
     });
@@ -130,31 +130,31 @@ osmcz.guideposts = function (map, baseLayers, overlays, controls, group) {
     //for Fody - znaceni
     //-----------------------------------------------------------
     var mark_foot_icon = L.icon({
-        iconUrl: osmcz.basePath + "img/gp/marking_foot.png",
+        iconUrl: osmba.basePath + "img/gp/marking_foot.png",
         iconSize: [35, 48],
         iconAnchor: [23, 45]
     });
 
     var mark_cycle_icon = L.icon({
-        iconUrl: osmcz.basePath + "img/gp/marking_cycle.png",
+        iconUrl: osmba.basePath + "img/gp/marking_cycle.png",
         iconSize: [35, 48],
         iconAnchor: [23, 45]
     });
 
     var mark_cycle_road_icon = L.icon({
-        iconUrl: osmcz.basePath + "img/gp/marking_cycle_road.png",
+        iconUrl: osmba.basePath + "img/gp/marking_cycle_road.png",
         iconSize: [35, 48],
         iconAnchor: [23, 45]
     });
 
     var mark_ski_icon = L.icon({
-        iconUrl: osmcz.basePath + "img/gp/marking_ski.png",
+        iconUrl: osmba.basePath + "img/gp/marking_ski.png",
         iconSize: [35, 48],
         iconAnchor: [23, 45]
     });
 
     var mark_wheelchair_icon = L.icon({
-        iconUrl: osmcz.basePath + "img/gp/marking_wheelchair.png",
+        iconUrl: osmba.basePath + "img/gp/marking_wheelchair.png",
         iconSize: [35, 48],
         iconAnchor: [23, 45]
     });
@@ -177,7 +177,7 @@ osmcz.guideposts = function (map, baseLayers, overlays, controls, group) {
 
                         var i, tags_content = "";
                         for (i = 0; i < tags.length; i++) {
-                            tags_content += '<a href="' + osmcz.photoDbUrl + '?tag=' + tags[i] + '"><span id="hashtag" class="label label-info">' + tags[i].replace(/:$/, "") + '</span></a> ';
+                            tags_content += '<a href="' + osmba.photoDbUrl + '?tag=' + tags[i] + '"><span id="hashtag" class="label label-info">' + tags[i].replace(/:$/, "") + '</span></a> ';
                         }
                         return (tags_content);
                     } else {
@@ -231,23 +231,23 @@ osmcz.guideposts = function (map, baseLayers, overlays, controls, group) {
             }
 
             if (!b.ref) {
-                b.ref = "nevíme";
+                b.ref = "ne znamo";
             }
 
             var html_content = "";
             html_content += "Fotografii poskytl: ";
-            html_content += "<a href='" + osmcz.photoDbUrl + "?author=" + b.author + "'>" + b.author + "</a>";
+            html_content += "<a href='" + osmba.photoDbUrl + "?author=" + b.author + "'>" + b.author + "</a>";
             html_content += "<br>";
-            html_content += "Pořízeno: " + b.created;
+            html_content += "Uslikano: " + b.created;
             html_content += "<br>";
 
             if (ftype == "gp_foot" || ftype == "gp_cycle" || ftype == "gp_ski" || ftype == "gp_wheelchair"|| ftype == "gp_cycle_foot" || ftype == "gp_ski_foot" || ftype == "emergency" ) {
-                html_content += "Číslo rozcestníku: ";
-                html_content += "<a href='" + osmcz.photoDbUrl + "?ref=" + (b.ref == "nevíme" ? "none" : b.ref) + "'>" + b.ref + "</a>";
+                html_content += "Broj putokaza: ";
+                html_content += "<a href='" + osmba.photoDbUrl + "?ref=" + (b.ref == "ne znamo" ? "none" : b.ref) + "'>" + b.ref + "</a>";
                 html_content += "<br>";
             }
             html_content += "<div class='gp-thumbnail'>";
-            html_content += "<a href='" + osmcz.photoDbUrl + "files/" + b.id + ".jpg'>";
+            html_content += "<a href='" + osmba.photoDbUrl + "files/" + b.id + ".jpg'>";
             html_content += "<div id='thumbnailLoadSpinner" + b.id + "' class='text-center'><br><span class='glyphicon glyphicon-refresh text-info gly-spin'></span></div>";
             html_content += "<img id='thumbnailImage" + b.id + "' src='' class='center-block' />";
             html_content += "</a>";
@@ -256,7 +256,7 @@ osmcz.guideposts = function (map, baseLayers, overlays, controls, group) {
             html_content += "<div id='hashtags'>" + parse_hashtags(b.tags) + "</div>";
 
             html_content += "<div class='buttons-bar'>";
-            html_content += "<a href='" + osmcz.photoDbUrl + "?id=" + b.id + "'><button type='button' class='btn btn-default btn-xs'>";
+            html_content += "<a href='" + osmba.photoDbUrl + "?id=" + b.id + "'><button type='button' class='btn btn-default btn-xs'>";
             html_content += '   <div class="glyphicon glyphicon-pencil"></div> Upravit';
             html_content += '</button></a>';
 
@@ -265,7 +265,7 @@ osmcz.guideposts = function (map, baseLayers, overlays, controls, group) {
             html_content += "<a href='#'>";
             html_content += '<button type="button" class="btn btn-default btn-xs"';
             html_content += "onclick='javascript:guideposts.move_point(" + b.id + "," + geometry[1] + "," + geometry[0] + ")'>";
-            html_content += '<div class="glyphicon glyphicon-move"></div> Přesunout';
+            html_content += '<div class="glyphicon glyphicon-move"></div> Premjestiti';
             html_content += "</button>";
             html_content += "</a>";
             html_content += "</div>";
@@ -356,14 +356,14 @@ osmcz.guideposts = function (map, baseLayers, overlays, controls, group) {
         var id = e.popup._source.feature.properties.id;
         if (id) {
             var tb = new Image();
-            tb.src = osmcz.photoDbUrl + "files/250px/" + id + ".jpg";
+            tb.src = osmba.photoDbUrl + "files/250px/" + id + ".jpg";
             tb.onload = function () {
                 popupThumbnail = tb.src;
                 $('#thumbnailLoadSpinner' + id).hide();
                 $('#thumbnailImage' + id).attr('src', tb.src);
             };
             tb.onerror = function () {
-                $('#thumbnailLoadSpinner' + id).html('<br><span class="glyphicon glyphicon-picture bigger semigrey thumbnail crossed" title="Náhled není k dispozici."><span><br>');
+                $('#thumbnailLoadSpinner' + id).html('<br><span class="glyphicon glyphicon-picture bigger semigrey thumbnail crossed" title="Pretpregled nije dostupan."><span><br>');
                 $('#thumbnailLoadSpinner' + id).attr('class', 'text-nowrap text-center');
             };
         }
@@ -455,11 +455,11 @@ osmcz.guideposts = function (map, baseLayers, overlays, controls, group) {
         }
     });
     /* Add overlay to the map */
-    layersControl.addOverlay(markers, "Fotky Fody", group);
+    layersControl.addOverlay(markers, "Slike putokaza", group);
 
     /* Add overlay to the overlays list as well
      * This allows restoration of overlay state on load */
-    overlays[group]["Fotky Fody"] = markers;
+    overlays[group]["Slike putokaza"] = markers;
 
     // -- methods --
 
@@ -494,7 +494,7 @@ osmcz.guideposts = function (map, baseLayers, overlays, controls, group) {
                 gpMarkerPolyline.setLatLngs([[gp_lat, gp_lon], position]);
             });
 
-        moving_marker.bindPopup('Presuň mě na cílové místo');
+        moving_marker.bindPopup('Premjesti na željeno mjesto');
         moving_marker.addTo(map);
         //moving_flag = false; //user will now interact with placed marker until he is done
     }
@@ -505,7 +505,7 @@ osmcz.guideposts = function (map, baseLayers, overlays, controls, group) {
         moving_marker = null;
     }
 
-    osmcz.guideposts.prototype.cancel_moving = function () {
+    osmba.guideposts.prototype.cancel_moving = function () {
         moving_flag = false;
         if (moving_marker) {
             destroy_moving_marker();
@@ -513,14 +513,14 @@ osmcz.guideposts = function (map, baseLayers, overlays, controls, group) {
         hide_sidebar();
     }
 
-    osmcz.guideposts.prototype.finish_moving = function () {
+    osmba.guideposts.prototype.finish_moving = function () {
 
         if (moving_marker) {
             final_lat = moving_marker.getLatLng().lat;
             final_lon = moving_marker.getLatLng().lng;
         } else {
-            toastr.error('Nejprve prosím vyberte novou pozici.',
-                         'Chyba!',
+            toastr.error('Prvo izaberite novu poziciju.',
+                         'Greška!',
                         {
                             closeButton: true,
                             positionClass: "toast-bottom-center",
@@ -532,8 +532,8 @@ osmcz.guideposts = function (map, baseLayers, overlays, controls, group) {
         var dataStr = 'id=' + gp_id + '&lat=' + final_lat + '&lon=' + final_lon;
 
         //tkk - not used
-        //if (osmcz.user && osmcz.user.username) {
-        //    dataStr = dataStr + '&lname=' + osmcz.user.username;
+        //if (osmba.user && osmba.user.username) {
+        //    dataStr = dataStr + '&lname=' + osmba.user.username;
         //}
 
         var note = document.getElementById("gp_usr_message").value;
@@ -543,7 +543,7 @@ osmcz.guideposts = function (map, baseLayers, overlays, controls, group) {
 
         $.ajax({
             type: 'POST',
-            url: osmcz.photoDbUrl + 'api/move',
+            url: osmba.photoDbUrl + 'api/move',
             data: dataStr,
             async: false,
             xhrFields: {
@@ -552,7 +552,7 @@ osmcz.guideposts = function (map, baseLayers, overlays, controls, group) {
             timeout: 3000
         })
             .done(function (data) {
-                toastr.success('Nová pozice byla uložena na server.', 'Děkujeme', {
+                toastr.success('Nova pozicija je spašena na serveru.', 'Hvala!', {
                        closeButton: true,
                        positionClass: "toast-bottom-center"
                 });
@@ -569,16 +569,16 @@ osmcz.guideposts = function (map, baseLayers, overlays, controls, group) {
               console.log('move failed ' + status);
               if (status == 401) {
                 need_api_auth = true;
-                toastr.error('Nejste přihlášen(a).',
-                            'Chyba!',
+                toastr.error('Niste prijavljeni.',
+                            'Greška!',
                             {
                                 closeButton: true,
                                 positionClass: "toast-bottom-center",
                                 timeOut: 0
                 });
               } else {
-                toastr.error('Uložení nové pozice se nepovedlo. ' + status + ': ' + statusText,
-                            'Chyba!',
+                toastr.error('Spašavanje nove pozicije nije uspjelo. ' + status + ': ' + statusText,
+                            'Greška!',
                             {
                                 closeButton: true,
                                 positionClass: "toast-bottom-center",
@@ -591,8 +591,8 @@ osmcz.guideposts = function (map, baseLayers, overlays, controls, group) {
             });
 
         if(need_api_auth) {
-            toastr.error('Nejste přihlášen(a).',
-                        'Chyba!',
+            toastr.error('Niste prijavljeni.',
+                        'Greška!',
                         {
                             closeButton: true,
                             positionClass: "toast-bottom-center",
@@ -606,7 +606,7 @@ osmcz.guideposts = function (map, baseLayers, overlays, controls, group) {
 
         info.innerHTML = "<label for='lln'>lat, lon:</label>";
         info.innerHTML += "<input type='text' class='form-control' id='lln' readonly value='" + lat.toFixed(6) + ", " + lon.toFixed(6) + "'>";
-        info.innerHTML += "<label for='lld'>Vzdálenost:</label>";
+        info.innerHTML += "<label for='lld'>Udaljenost:</label>";
         info.innerHTML += "<input type='text' class='form-control' id='lld' readonly value='" + distance.toFixed(1) + "m" + "'>";
     }
 
@@ -627,7 +627,7 @@ osmcz.guideposts = function (map, baseLayers, overlays, controls, group) {
 
         var auth = false;
         xhr = $.ajax({
-            url: osmcz.photoDbUrl + 'api/logged',
+            url: osmba.photoDbUrl + 'api/logged',
             async: false,
             xhrFields: {
               withCredentials: true
@@ -639,8 +639,8 @@ osmcz.guideposts = function (map, baseLayers, overlays, controls, group) {
           .fail(function(jqXHR, textStatus, errorThrown) {
             var inner = [];
             var content = document.getElementById("sidebar-content");
-            inner.push("<h4>Nejste přihlášeni!</h4>");
-            inner.push("<p class='text-center'><a href='" + osmcz.photoDbUrl + "' target='_blank'>Přihlaste</a> se prosím do Fody");
+            inner.push("<h4>Niste prijavljeni!</h4>");
+            inner.push("<p class='text-center'><a href='" + osmba.photoDbUrl + "' target='_blank'>Prijavite se</a> u foto bazu podataka");
             content.innerHTML = inner.join('');
 
             return false;
@@ -651,26 +651,26 @@ osmcz.guideposts = function (map, baseLayers, overlays, controls, group) {
         var inner = [];
         var content = document.getElementById("sidebar-content");
 
-        inner.push("<h4>Přesun fotky</h4>");
-        inner.push("<p class='mark text-center'>Vyberte novou pozici a stiskněte tlačítko [Přesunout sem]");
-        inner.push("<h5>Současná pozice</h5>");
+        inner.push("<h4>Pomjeranje slike</h4>");
+        inner.push("<p class='mark text-center'>Izaberite novu poziciju i pritisnite dugme [Pomjeriti ovamo]");
+        inner.push("<h5>Trenutna pozicija</h5>");
         inner.push("<label for='llc'>lat, lon:</label>");
         inner.push("<input type='text' class='form-control' id='llc' readonly value='" + gp_lat.toFixed(6) + ", " + gp_lon.toFixed(6) + "'>");
-        inner.push("<h5>Přesunout na</h5>");
-        inner.push("<div id='guidepost_move_info'><p class='mark text-center'>Klikněte do mapy</p>");
+        inner.push("<h5>Pomjeriti na</h5>");
+        inner.push("<div id='guidepost_move_info'><p class='mark text-center'>Kliknite u mapu</p>");
         inner.push("</div>");
-        inner.push("<h5>Připojit zprávu</h5>");
-        inner.push("<textarea class='form-control' rows='3' id='gp_usr_message' placeholder='moje zpráva…'></textarea>");
+        inner.push("<h5>Dodati poruku</h5>");
+        inner.push("<textarea class='form-control' rows='3' id='gp_usr_message' placeholder='moja poruka…'></textarea>");
         inner.push("<hr>");
-        inner.push("<button class='btn btn-default btn-xs' onclick='javascript:guideposts.cancel_moving()'>Zrušit</button>");
-        inner.push("<button class='btn btn-default btn-xs pull-right' onclick='javascript:guideposts.finish_moving()'>Přesunout sem</button>");
+        inner.push("<button class='btn btn-default btn-xs' onclick='javascript:guideposts.cancel_moving()'>Otkazati</button>");
+        inner.push("<button class='btn btn-default btn-xs pull-right' onclick='javascript:guideposts.finish_moving()'>Pomjeriti ovamo</button>");
         inner.push("</div>");
         inner.push("<hr><img class='thumbnail center-block' src='" + popupThumbnail + "'/>");
 
         content.innerHTML = inner.join('');
     }
 
-    osmcz.guideposts.prototype.move_point = function (gid, glat, glon) {
+    osmba.guideposts.prototype.move_point = function (gid, glat, glon) {
         if (!moving_flag) {
             moving_flag = true;
             gp_id = gid;
@@ -722,10 +722,10 @@ osmcz.guideposts = function (map, baseLayers, overlays, controls, group) {
 
             markers.clearLayers();
 
-            var geo_json_url = osmcz.photoDbUrl + 'api/show';
+            var geo_json_url = osmba.photoDbUrl + 'api/show';
             request_from_url(geo_json_url, retrieve_geojson, error_gj)
 
-            //geo_json_url = 'https://api.openstreetmap.cz/commons';
+            //geo_json_url = 'https://api.openstreetmap.ba/commons';
             //request_from_url(geo_json_url, retrieve_commons, error_gj)
 
         } else {
@@ -736,7 +736,7 @@ osmcz.guideposts = function (map, baseLayers, overlays, controls, group) {
     function retrieve_geojson(data) {
         layer_guidepost.clearLayers();
         if (data != "") {
-            layer_guidepost.addData(data); //we have text/json instead of api.osm.cz with text/plain
+            layer_guidepost.addData(data); //we have text/json instead of api.osm.ba with text/plain
             markers.addLayer(layer_guidepost);
             map.addLayer(markers);
         }

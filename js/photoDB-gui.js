@@ -13,12 +13,12 @@ L.Control.PhotoDBGui = L.Control.extend({
 
         // Get list of supported tags from API
         xhr = $.ajax({
-            url: osmcz.photoDbUrl + 'api/tags',
+            url: osmba.photoDbUrl + 'api/tags',
             context: this
         })
           .done(function(data) {
              for (let idx in data) {
-                 osmcz.apiTagsMap.set(data[idx].name, data[idx]);
+                 osmba.apiTagsMap.set(data[idx].name, data[idx]);
             }
           })
           .fail(function(jqXHR, textStatus, errorThrown) {
@@ -53,7 +53,7 @@ L.Control.PhotoDBGui = L.Control.extend({
 
     openSidebar: function (ref, name) {
 
-        if (osmcz.sidebar.isVisible()) {
+        if (osmba.sidebar.isVisible()) {
             return false;
         }
 
@@ -76,7 +76,7 @@ L.Control.PhotoDBGui = L.Control.extend({
 
         e.stopPropagation();
 
-        if (osmcz.sidebar.isVisible()) {
+        if (osmba.sidebar.isVisible()) {
             return false;
         }
 
@@ -85,23 +85,23 @@ L.Control.PhotoDBGui = L.Control.extend({
     },
 
     _showForm: function (ref, gpName) {
-        osmcz.sidebar.setContent(this._sidebarInit());
+        osmba.sidebar.setContent(this._sidebarInit());
         var auth = false;
 
-        if (osmcz.apiTagsMap.size == 0) {
+        if (osmba.apiTagsMap.size == 0) {
             var inner = [];
             var content = document.getElementById("sidebar-content");
-            inner.push("<h4>Chyba získání typu fotek z Fody!</h4>");
+            inner.push("<h4>Greška pribavljanja vrste slika iz foto baze podataka!</h4>");
             content.innerHTML = inner.join('');
 
             sidebar.on('hidden', this._closeSidebar, this);
-            osmcz.sidebar.show();
+            osmba.sidebar.show();
             return false;
         }
 
 
         xhr = $.ajax({
-            url: osmcz.photoDbUrl + 'api/logged',
+            url: osmba.photoDbUrl + 'api/logged',
             async: false,
             xhrFields: {
               withCredentials: true
@@ -111,28 +111,28 @@ L.Control.PhotoDBGui = L.Control.extend({
           .fail(function(jqXHR, textStatus, errorThrown) {
             var inner = [];
             var content = document.getElementById("sidebar-content");
-            inner.push("<h4>Nejste přihlášeni!</h4>");
-            inner.push("<p class='text-center'><a href='"+osmcz.photoDbUrl+"' target='_blank'>Přihlaste</a> se prosím do Fody");
+            inner.push("<h4>Niste prijavljeni!</h4>");
+            inner.push("<p class='text-center'><a href='"+osmba.photoDbUrl+"' target='_blank'Prijavite se</a> u foto bazu podataka");
             content.innerHTML = inner.join('');
 
             sidebar.on('hidden', this._closeSidebar, this);
-            osmcz.sidebar.show();
+            osmba.sidebar.show();
 
             return false;
           });
 
         if(!auth) return;
 
-//         console.log(osmcz.apiTagsMap);
+//         console.log(osmba.apiTagsMap);
 
         var cnt = document.getElementById("sidebar-content");
 
         // from http://stackoverflow.com/a/39065147
         // Image upload html template
         const formTemplate = ({maxSize}) => `
-        <h4>Nahrání fotografie</h4>
+        <h4>Upload slike</h4>
         <div id="photoDB-gp-name" class="photoDB-name text-info"></div>
-        <p class='mark text-center'>Vyberte fotografii, doplňte údaje a stiskněte tlačítko [Nahrát fotografii]
+        <p class='mark text-center'>Izaberite sliku, popunite podatke i pritisnite dugme [Poslati sliku]
 
         <form id="photoDB-upload-form" name="photoDB-upload-form" method="post" enctype="multipart/form-data" target="upload_target">
             <input type="hidden" name="action" value="file" />
@@ -144,11 +144,11 @@ L.Control.PhotoDBGui = L.Control.extend({
             <fieldset id="photo">
                 <h5>Fotografie</h5>
                 <a href="#" class="darken" data-toggle="modal" data-target="#myModal">
-                    <img id="photoDB-preview" height="200" src="" alt="Náhled fotografie..." class="thumbnail center-block">
+                    <img id="photoDB-preview" height="200" src="" alt="Pretpregled slike..." class="thumbnail center-block">
                 </a>
                 <input name="uploadedfile" type="file" id="photoDB-file" size="20" class="hidden"/>
                 <div id="imgSelBtnDiv">
-                    <input type="button" id="imgSelBtn" value="Vyberte fotografii" class="btn btn-default btn-xs center-block" />
+                    <input type="button" id="imgSelBtn" value="Izaberite sliku" class="btn btn-default btn-xs center-block" />
                 </div>
                 <div id="photoDB-img-message" class="alert alert-danger photoDB-message text-center"></div>
             </fieldset>
@@ -158,7 +158,7 @@ L.Control.PhotoDBGui = L.Control.extend({
                 <div class="input-group input-group-sm">
                     <div id="latlonSource" class="input-group-btn input-group-btn" data-toggle="buttons">
                         <label id="sourceManual" class="btn btn-secondary btn-default active">
-                            <input type="radio" id="latlonSourceManual" name="latlonSource" value="manual" autocomplete="off"> Ručně
+                            <input type="radio" id="latlonSourceManual" name="latlonSource" value="manual" autocomplete="off"> Ručno
                         </label>
                         <label id="sourceExif" class="btn btn-secondary btn-default disabled">
                             <input type="radio" id="latlonSourceExif" name="latlonSource" value="exif" autocomplete="off" checked> Exif
@@ -170,22 +170,22 @@ L.Control.PhotoDBGui = L.Control.extend({
             </fieldset>
 
             <fieldset id="otherData">
-                <h5>Doplňující údaje</h5>
+                <h5>Dodatni podaci</h5>
                 <div class="form">
                     <label for="phototype" class="label-margin">Objekt na fotografii:</label>
                     <select id="phototype" class="form-control">
                     </select>
                     <div id="guidepostOptions">
-                        <label for="guidepostContent" class="label-margin">Typ rozcestníku:</label>
+                        <label for="guidepostContent" class="label-margin">Vrsta putokaza:</label>
                         <div id="guidepostContent" class="btn-group btn-group-xs" data-toggle="buttons">
                         </div>
                     </div>
                     <div id="guidepostRef">
                         <label for="ref" class="label-margin">Ref:</label>
-                        <input type="text" id="ref" name="ref" value="" placeholder="Například: XX114 nebo 0123/45" title="Číslo rozcestníku bez posledního písmene." class="form-control input-sm"/>
+                        <input type="text" id="ref" name="ref" value="" placeholder="Na primjer: XX114 ili 0123/45" title="Broj putokaza." class="form-control input-sm"/>
                     </div>
-                    <label for="note" class="label-margin">Poznámka: </label>
-                    <input type="text" id="note" name="note" value="" placeholder="Zde můžete vložit poznámku k fotografii" class="form-control input-sm"/>
+                    <label for="note" class="label-margin">Napomena: </label>
+                    <input type="text" id="note" name="note" value="" placeholder="Ovdje možete unijeti napomenu za sliku" class="form-control input-sm"/>
                     <div id="photoDB-otherData-message" class="photoDB-message mark text-center" style="display: none;"></span>
                 </div>
             </fieldset>
@@ -193,7 +193,7 @@ L.Control.PhotoDBGui = L.Control.extend({
                 <div class="photoDB-btn-grp">
                     <input type="reset" id="resetBtn" name="reset" value="Reset" onclick="return false;" class="btn btn-default btn-xs"/>
                     <button type="submit" id="submitBtn" name="submitBtn" onclick="return false;" class="btn btn-default btn-xs pull-right" disabled>
-                    <span id="submitBtnIcon" class=""></span> Nahrát fotografii
+                    <span id="submitBtnIcon" class=""></span> Poslati sliku
                 </div>
             </fieldset>
         </form>
@@ -212,7 +212,7 @@ L.Control.PhotoDBGui = L.Control.extend({
         var submitBtn = document.getElementById("submitBtn");
 
         let sOptions = [];
-        for (let [gpKey,gpType] of osmcz.apiTagsMap) {
+        for (let [gpKey,gpType] of osmba.apiTagsMap) {
             sOptions.push('<option value="'+gpType.name+'">'+gpType.describe+'</option>');
         }
 
@@ -236,7 +236,7 @@ L.Control.PhotoDBGui = L.Control.extend({
                 <div class="modal-content">
                     <div class="modal-body">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <img src="" alt="Načítám náhled" id="modalImg" class="thumbnail block-center" style="width: 100%;" >
+                        <img src="" alt="Učitavanje pretpregleda" id="modalImg" class="thumbnail block-center" style="width: 100%;" >
                     </div>
                 </div>
             </div>
@@ -297,7 +297,7 @@ L.Control.PhotoDBGui = L.Control.extend({
         }
 
         sidebar.on('hidden', this._closeSidebar, this);
-        osmcz.sidebar.show();
+        osmba.sidebar.show();
     },
 
     _closeSidebar: function (e) {
@@ -334,7 +334,7 @@ L.Control.PhotoDBGui = L.Control.extend({
     },
 
     _phototypeChanged: function (e) {
-        let pType = osmcz.apiTagsMap.get($('#phototype option:selected')[0].value);
+        let pType = osmba.apiTagsMap.get($('#phototype option:selected')[0].value);
 
         if (pType == null) {
             return;
@@ -379,11 +379,11 @@ L.Control.PhotoDBGui = L.Control.extend({
 
         if (file.type.match(imageType)) {
             preview.attr("src", "");
-            preview.attr("alt", "Generuji náhled. Počkejte prosím...");
+            preview.attr("alt", "Generisanje pretpregleda. Molimo sačekajte...");
 
             reader.onloadend = function () {
                 preview.attr("src", reader.result);
-                preview.attr("alt", "Náhled fotografie...");
+                preview.attr("alt", "Pretpregled slike...");
                 alreadySent.val("no");
             }
 
@@ -680,7 +680,7 @@ L.Control.PhotoDBGui = L.Control.extend({
         $('#photoDB-upload-form #lon').val(this.positionMarker.getLatLng().lng);
 
         var phototype = $('#photoDB-upload-form #phototype option:selected').val(),
-            tagData = osmcz.apiTagsMap.get(phototype);
+            tagData = osmba.apiTagsMap.get(phototype);
 
 
         // Sent ref only for guideposts
@@ -699,7 +699,7 @@ L.Control.PhotoDBGui = L.Control.extend({
         submitBtnIcon.attr('class', 'glyphicon glyphicon-refresh text-info gly-spin');
 
         $.ajax({
-            url: osmcz.photoDbUrl + 'api/add',
+            url: osmba.photoDbUrl + 'api/add',
             type: 'POST',
             data: formData,
             async: false,
@@ -720,8 +720,8 @@ L.Control.PhotoDBGui = L.Control.extend({
                             positionClass: "toast-bottom-center"
                         });
                     } else { // Error during upload
-                        toastr.error('Fotografii se nepodařilo uložit na server.<br><em>Detail: </em>' + result[1],
-                            'Chyba!',
+                        toastr.error('Spašavanje slike na server nije uspjelo.<br><em>Razlog: </em>' + result[1],
+                            'Greška!',
                             {
                                 closeButton: true,
                                 positionClass: "toast-bottom-center",
@@ -734,7 +734,7 @@ L.Control.PhotoDBGui = L.Control.extend({
                         submitBtnIcon.attr('class', 'glyphicon glyphicon-warning-sign text-danger');
                     }
                 } else { // Unknown state of upload
-                    toastr.error('Fotografii se nepodařilo  uložit na server.<br><em>Detail: </em>' + data,
+                    toastr.error('Spašavanje slike na server nije uspjelo.<br><em>Razlog: </em>' + data,
                         'Chyba!',
                         {closeButton: true, positionClass: "toast-bottom-center", timeOut: 0});
                     // Re-enable submit button
@@ -745,7 +745,7 @@ L.Control.PhotoDBGui = L.Control.extend({
                 }
               },
               400: function () {
-                toastr.error('Fotografii se nepodařilo  uložit na server.<br><em>Detail: </em>' + "Chybný požadavek",
+                toastr.error('Spašavanje slike na server nije uspjelo.<br><em>Razlog: </em>' + "Pogrešan zahtjev",
                     'Chyba!', {closeButton: true, positionClass: "toast-bottom-center", timeOut: 0});
                 // Re-enable submit button
                 $('#photoDB-upload-form #submitBtn').prop('disabled', false);
@@ -755,7 +755,7 @@ L.Control.PhotoDBGui = L.Control.extend({
                 return false;
               },
               401: function () {
-                toastr.error('Fotografii se nepodařilo  uložit na server.<br><em>Detail: </em>' + "Nejste přihlášeni k Fody",
+                toastr.error('Spašavanje slike na server nije uspjelo.<br><em>Razlog: </em>' + "Niste prijavljeni u foto bazu podataka",
                     'Chyba!', {closeButton: true, positionClass: "toast-bottom-center", timeOut: 0});
                 // Re-enable submit button
                 $('#photoDB-upload-form #submitBtn').prop('disabled', false);

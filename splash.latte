@@ -1,4 +1,4 @@
-{block title}OpenStreetMap.cz{/block}
+{block title}OpenStreetMap.ba{/block}
 {block layout_aftertitle}{/block}
 {block map}{include #osmbamap}{/block}
 
@@ -10,14 +10,14 @@
             <button type="button" class="close close-overlay" aria-label="Close"><span>&times;</span>
             </button>
 
-            <h1>Hezky, české&nbsp;<img src="/theme/img/osmba.220x220.png" alt="Logo OSM BiH" width="110" height="110"
-                                       title="přeci OpenStreetMapy :-)" class="osmlogo">!</h1>
+            <h1>Vidi, mape za BiH &nbsp;<img src="/theme/img/osmba.220x220.png" alt="Logo OSM BiH" width="110" height="110"
+                                       title="OpenStreetMap BiH" class="osmlogo">!</h1>
 
-            <p class="lead">OpenStreetMap je mapa, kterou může kdokoliv upravovat. Něco jako Wikipedie. Česká
-                <a href="/komunita">komunita</a> Vám zde nabízí mapovou aplikaci, své <a href="/projekty">projekty</a>.
+            <p class="lead">OpenStreetMap je mapa koju bilo ko može uređivati. Nešto kao Wikipedija. 
+                <a href="/zajednica">Zajednica</a> OSM volontera u BiH vam donosi aplikaciju za mape, te svoje <a href="/projekti">projekte</a>.
             </p>
 
-            <p><a href="/vyuziti" class="btn btn-primary btn-large">Zjistit více o OSM</a>
+            <p><a href="/vyuziti" class="btn btn-primary btn-large">Saznati više o OSM</a>
             </p>
         </div>
     </div>
@@ -34,13 +34,12 @@
                 <div class="content-box-inner">
                     <img src="/theme/img/mapsme/mapsme_logo.svg" alt="MAPS.ME">
 
-                    <p class="text3">Detailní a zcela offline mapy pro všechny mobilní zařízení. Včetně navigace a
-                        offline editace POI.</p>
+                    <p class="text3">Detaljne i potpuno offline mape za sve mobilne uređaje, sve navigacijom i offline uređivanjem tački interesa.</p>
 
                     <a href="https://maps.me/iphone-app-pro" title="MAPS.ME in the Apple AppStore"><img height="33" src="/theme/img/mapsme/appstore.svg" alt="AppStore"></a>
                     <a href="https://maps.me/android-app-pro" title="MAPS.ME in the Google Play Store"><img height="33" src="/theme/img/mapsme/googleplay.svg" alt="Google Play"></a>
                     <a href="https://maps.me/amazon-app-pro" title="MAPS.ME in the Amazon AppStore"><img height="33" src="/theme/img/mapsme/amazon.svg" alt="Amazon AppStore"></a>
-                    <br><a class="text-muted" href="https://maps.me/get">další platformy</a>
+                    <br><a class="text-muted" href="https://maps.me/get">druge platforme</a>
                 </div>
             </div>
 
@@ -53,20 +52,20 @@
                         {foreach dibi::query('SELECT * FROM mailarchive ORDER BY date DESC LIMIT %i', $limit) as $r}
                         <tr>
                             <td class="img">
-                                <a n:href="talkcz:conversation $r->conversationid"><img
+                                <a n:href="talkba:conversation $r->conversationid"><img
                                         src="https://www.gravatar.com/avatar/{md5(strtolower($r[from]))}?s=32&d=mm"
                                         alt="gravatar" width="32" height="32"></a>
                             <td class="subject">
-                                <a n:href="talkcz:conversation $r->conversationid">{$r[subject]|truncate:50}</a>
+                                <a n:href="talkba:conversation $r->conversationid">{$r[subject]|truncate:50}</a>
                             <td class="date">{$r[date]|timeago}
                                 {/foreach}
                     </table>
 
                     <p class="text-right">
-                        <a class="ajax btn btn-link" n:href="this konf=>$limit+5">načíst více</a>
-                        <a class="btn btn-sm btn-default" n:href="talkcz:"
-                           role="button">Archiv konference</a>
-                        <a class="btn btn-sm btn-success" href="/komunita" role="button">Napište nám</a>
+                        <a class="ajax btn btn-link" n:href="this konf=>$limit+5">učitati više</a>
+                        <a class="btn btn-sm btn-default" n:href="talkba:"
+                           role="button">Arhiva konferencije</a>
+                        <a class="btn btn-sm btn-success" href="/zajednica" role="button">Pišite nam</a>
                     </p>
 
                 </div>

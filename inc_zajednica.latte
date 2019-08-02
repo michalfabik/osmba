@@ -41,11 +41,11 @@
                         <img src="/theme/img/logo-osm.svg" width="16" alt="">
                         <a href="http://www.openstreetmap.org/user/{$r->username}">{$r->username}</a>
                         <a href="http://yosmhm.neis-one.org/?{$r->username}" class="stat"
-                              title="Počet changesetů na osm.org (účet vytvořen {$r->account_created|date:'j.n.Y'})">
+                              title="Broj changesetova na osm.org (nalog kreiran {$r->account_created|date:'j.n.Y'})">
                             <span class="glyphicon glyphicon-stats" aria-hidden="true"></span>{$r->changesets}
                         </a>
 
-                        <a n:href="talkba:author $template->talkstub($r->email)" class="stat" title="Počet příspěvků v konferenci talk-ba">
+                        <a n:href="talkba:author $template->talkstub($r->email)" class="stat" title="Broj postova u konferenciji talk-ba">
                             <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>{$r->talk_cz_mails}
                         </a>
                     </div>
@@ -60,7 +60,7 @@
                             {foreach explode(",", $r->projects) as $id}
                                 {var $p = PagesModel::getPageById(trim($id,'()'))}
                                 <a href="{$p->link()}" class="label label-success"
-                                   title="Otevřít stránku projektu &quot;{$p->name}&quot;">{$p->getMeta('project_tag')}</a>
+                                   title="Otvoriti stranicu projekta &quot;{$p->name}&quot;">{$p->getMeta('project_tag')}</a>
                             {/foreach}
                         {/if}
                         {if $r->places}
@@ -79,19 +79,19 @@
 {if !$is_project_page}
     {if $user->isLoggedIn() AND $user->identity->username}
         <div class="komunita">
-            <h3 id="add-myself">Můj profil na této stránce</h3>
+            <h3 id="add-myself">Moj profil na ovom sajtu</h3>
 
-            <p>Profil na této stránce je jakýsi medailonek, který slouží pro přehled v rámci české komunity.
-                Primární uživatelská stránka zůstává na osm.org.</p>
+            <p>Profil na ovoj stranici služi samo za potrebe bh zajednice.
+                Primarni korisnički profil ostaje na osm.org.</p>
 
-            <p>Obrázek je třeba změnit na <a
+            <p>Sliku treba promijeniti na <a
                         href="https://www.openstreetmap.org/user/{$user->identity->username}/account">osm.org</a>
-                <a n:href="Oauth:login" class="btn btn-default btn-xs">Znovu načíst</a>
+                <a n:href="Oauth:login" class="btn btn-default btn-xs">Učitati ponovo</a>
                 nebo <a href="https://gravatar.com/emails/">gravatar.com</a>. </p>
 
             {control CommunityFormPlugin}
         </div>
     {else}
-        <a n:href="Oauth:login backUrl => '/komunita#add-myself'" class="btn btn-default">Přidat svůj profil</a>
+        <a n:href="Oauth:login backUrl => '/komunita#add-myself'" class="btn btn-default">Dodati svoj profil</a>
     {/if}
 {/if}

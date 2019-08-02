@@ -1,7 +1,7 @@
 // (c) 2016 osmcz-app, https://github.com/osmcz/osmcz
 
-var osmcz = osmcz || {};
-osmcz.activeLayer = function (map) {
+var osmba = osmba || {};
+osmba.activeLayer = function (map) {
     // -- constructor --
 
     var timeout;
@@ -17,7 +17,7 @@ osmcz.activeLayer = function (map) {
             },
 
             pointToLayer: function (feature, latlng) {
-                return L.marker(latlng, {icon: osmcz.iconsService.get(feature.properties.tags)});
+                return L.marker(latlng, {icon: osmba.iconsService.get(feature.properties.tags)});
             },
 
             onEachFeature: function (feature, layer) {
@@ -25,32 +25,32 @@ osmcz.activeLayer = function (map) {
                 if (!(layer instanceof L.Point)) {
                     layer.on('click', function (event) {
                         if (event.target && event.target.feature &&
-                            !osmcz.sidebar.isVisible()) {
+                            !osmba.sidebar.isVisible()) {
                             console.log('active-layer: click', event.target.feature);
 
                             clearTimeout(timeout);
-                            osmcz.permanentlyDisplayed = true;
-                            osmcz.poiPopup.open(event.target.feature, event.target.options.icon.options.iconUrl);
+                            osmba.permanentlyDisplayed = true;
+                            osmba.poiPopup.open(event.target.feature, event.target.options.icon.options.iconUrl);
 
                             // change url, it is then possible to load without active layer
-                            osmcz.poiPopup.setUrl(event.target.feature.properties);
+                            osmba.poiPopup.setUrl(event.target.feature.properties);
                         }
                     });
 
                     layer.on('mouseover', function (event) {
-                        if (osmcz.permanentlyDisplayed || osmcz.sidebar.isVisible())
+                        if (osmba.permanentlyDisplayed || osmba.sidebar.isVisible())
                             return;
 
                         if (event.target && event.target.feature) {
                             clearTimeout(timeout);
                             timeout = setTimeout(function () {
-                                osmcz.poiPopup.open(event.target.feature, event.target.options.icon.options.iconUrl);
+                                osmba.poiPopup.open(event.target.feature, event.target.options.icon.options.iconUrl);
                             }, 100);
                         }
                     });
                     layer.on('mouseout', function (event) {
-                        if (!osmcz.permanentlyDisplayed &&
-                            !osmcz.sidebar.isVisible()) {
+                        if (!osmba.permanentlyDisplayed &&
+                            !osmba.sidebar.isVisible()) {
                             clearTimeout(timeout);
                             timeout = setTimeout(function () {
                                 defaultPoiPanel();
@@ -66,22 +66,22 @@ osmcz.activeLayer = function (map) {
     function resetPanel() {
         console.log('active-layer: reset-panel');
 
-        if (!osmcz.poiPopupOpen) {
+        if (!osmba.poiPopupOpen) {
             return;
         }
 
-        osmcz.poiPopup.close();
+        osmba.poiPopup.close();
         defaultPoiPanel();
     }
 
     function defaultPoiPanel() {
-        osmcz.poiSidebar.hide();
-        osmcz.poiSidebar.setContent('');
+        osmba.poiSidebar.hide();
+        osmba.poiSidebar.setContent('');
     }
 
     map.on('click', resetPanel);
 
-    osmcz.poiSidebar.on('hidden', resetPanel);
+    osmba.poiSidebar.on('hidden', resetPanel);
 
     return geojsonTileLayer;
 };

@@ -1,21 +1,21 @@
 // (c) 2016 osmcz-app, https://github.com/osmcz/osmcz
 
 
-var osmcz = osmcz || {};
-osmcz.poiPopup = function (map) {
+var osmba = osmba || {};
+osmba.poiPopup = function (map) {
     // -- constructor --
 
-    osmcz._map = map;
+    osmba._map = map;
 };
 
 // static fields
-osmcz.permanentlyDisplayed = false;
-osmcz._marker = L.circleMarker([0, 0]);
-osmcz._map = false;
-osmcz.poiPopupOpen = false;
+osmba.permanentlyDisplayed = false;
+osmba._marker = L.circleMarker([0, 0]);
+osmba._map = false;
+osmba.poiPopupOpen = false;
 
 // static methods
-osmcz.poiPopup.load = function (object) {
+osmba.poiPopup.load = function (object) {
 
     // exit when osm object does not exists or osmid is null
     if ((!object) || (!"id" in object)) {
@@ -30,7 +30,7 @@ osmcz.poiPopup.load = function (object) {
         success: function (data) {
             console.log("loaded xml", data);
 
-            osmcz.permanentlyDisplayed = true;
+            osmba.permanentlyDisplayed = true;
 
             var geojson = osm_geojson.osm2geojson(data);
             var feature = geojson.features[0];
@@ -57,7 +57,7 @@ osmcz.poiPopup.load = function (object) {
             }
 
             if (feature.properties.tags.name) {
-                document.title = feature.properties.tags.name + ' ~ OpenStreetMap.cz';
+                document.title = feature.properties.tags.name + ' ~ OpenStreetMap.ba';
             }
 
             console.log("geojson feature:", feature);
@@ -65,52 +65,52 @@ osmcz.poiPopup.load = function (object) {
             // zoom to feature
             var lon = feature.geometry.coordinates[0];
             var lat = feature.geometry.coordinates[1];
-            osmcz._map.setView([lat, lon]);
+            osmba._map.setView([lat, lon]);
 
             //set icon and show
-            var icon = osmcz.iconsService.get(feature.properties.tags);
-            poiSidebar.setContent(osmcz.poiPopup.getHtml(feature, icon.options.iconUrl));
+            var icon = osmba.iconsService.get(feature.properties.tags);
+            poiSidebar.setContent(osmba.poiPopup.getHtml(feature, icon.options.iconUrl));
             poiSidebar.show();
-            osmcz.poiPopupOpen = true;
+            osmba.poiPopupOpen = true;
         }
     });
 
 };
 
-osmcz.poiPopup.open = function (feature, icon) {  //currently from active-layer
-    poiSidebar.setContent(osmcz.poiPopup.getHtml(feature, icon));
+osmba.poiPopup.open = function (feature, icon) {  //currently from active-layer
+    poiSidebar.setContent(osmba.poiPopup.getHtml(feature, icon));
     poiSidebar.show();
-    osmcz.poiPopupOpen = true;
-    document.title = 'OpenStreetMap.cz';
+    osmba.poiPopupOpen = true;
+    document.title = 'OpenStreetMap.ba';
     if (feature.properties.tags.name) {
-        document.title = feature.properties.tags.name + ' ~ OpenStreetMap.cz';
+        document.title = feature.properties.tags.name + ' ~ OpenStreetMap.ba';
     }
 };
 
 
-osmcz.poiPopup.close = function () {
+osmba.poiPopup.close = function () {
     console.log('poi-popup: close');
 
-    if (!osmcz.poiPopupOpen) {
+    if (!osmba.poiPopupOpen) {
         return;
     }
 
-    osmcz._map.removeLayer(osmcz._marker);
-    osmcz.permanentlyDisplayed = false;
-    osmcz.poiSidebar.hide();
-    osmcz.poiPopupOpen = false;
+    osmba._map.removeLayer(osmba._marker);
+    osmba.permanentlyDisplayed = false;
+    osmba.poiSidebar.hide();
+    osmba.poiPopupOpen = false;
 
-    document.title = 'OpenStreetMap.cz';
+    document.title = 'OpenStreetMap.ba';
 
-    var path = (location.host === 'openstreetmap.cz' || location.host === 'osm.localhost')
+    var path = (location.host === 'openstreetmap.ba' || location.host === 'osm.localhost')
         ? '/'
         : location.pathname;
 
     history.replaceState('', '', path + location.hash);
 };
 
-osmcz.poiPopup.setUrl = function (p) {
-    var path = (location.host === 'openstreetmap.cz' || location.host === 'osm.localhost')
+osmba.poiPopup.setUrl = function (p) {
+    var path = (location.host === 'openstreetmap.ba' || location.host === 'osm.localhost')
         ? ('/' + p.osm_type + '/' + p.osm_id)
         : ('?' + p.osm_type + '=' + p.osm_id);
 
@@ -119,7 +119,7 @@ osmcz.poiPopup.setUrl = function (p) {
 
 
 // ------- POI panel template  -------
-osmcz.poiPopup.getHtml = function (feature, icon, embedded) {
+osmba.poiPopup.getHtml = function (feature, icon, embedded) {
 
     //TODO refactor
 
@@ -143,18 +143,18 @@ osmcz.poiPopup.getHtml = function (feature, icon, embedded) {
     var wikiLang = (userLang ? "?uselang=" + userLang : "" );
 
     // show circle marker
-    if (osmcz.permanentlyDisplayed) {
-        osmcz._marker.setLatLng([lat, lon]).addTo(osmcz._map);
+    if (osmba.permanentlyDisplayed) {
+        osmba._marker.setLatLng([lat, lon]).addTo(osmba._map);
     }
 
     var tpl = [];
 
     // Not needed when we are inside popup
     if (!embedded) {
-//       tpl.push(osmcz.permanentlyDisplayed ? '<a class="close">&times;</a>' : '');
+//       tpl.push(osmba.permanentlyDisplayed ? '<a class="close">&times;</a>' : '');
         tpl.push('<h4>');
         tpl.push('<img class="poi-icon" src="' + icon + '">&nbsp;');
-        tpl.push('<span class="h4-text">' + (feature.properties.tags.name || 'Bod zájmu') + '</span>');
+        tpl.push('<span class="h4-text">' + (feature.properties.tags.name || 'Tačka interesa') + '</span>');
         tpl.push('</h4>');
     }
 
@@ -239,9 +239,9 @@ osmcz.poiPopup.getHtml = function (feature, icon, embedded) {
 
     var section = function (obj, label, hide) {
         if (Object.keys(obj).length) {
-            hide && tpl.push('<p><b>' + label + '</b> <a href="#" onclick="$(this).parent().hide().next().show();return false">zobrazit</a></p>');
+            hide && tpl.push('<p><b>' + label + '</b> <a href="#" onclick="$(this).parent().hide().next().show();return false">prikazati</a></p>');
             hide && tpl.push('<div style="display:none">');
-            hide && tpl.push('<h5>' + label + ' <a href="#" onclick="$(this).parent().parent().hide().prev().show();return false">skrýt</a></h5>');
+            hide && tpl.push('<h5>' + label + ' <a href="#" onclick="$(this).parent().parent().hide().prev().show();return false">sakriti</a></h5>');
 
             hide || tpl.push('<h5>' + label + '</h5>');
             $.each(obj, function (k, v) {
@@ -255,18 +255,18 @@ osmcz.poiPopup.getHtml = function (feature, icon, embedded) {
         }
     };
 
-    section(name, 'Další jména:', true);
+    section(name, 'Drugi nazivi:', true);
     try {
         if (openingHours != '') {
             console.log(openingHours);
-            tpl = tpl.concat(osmcz.openingHoursService.getHtml(openingHours));
+            tpl = tpl.concat(osmba.openingHoursService.getHtml(openingHours));
         }
     } catch (err) {
-        tpl.push("<b>opening_hours</b> = " + openingHours + "<br> <em>(Nepodařilo se naparsovat: " + err + ")</em>");
+        tpl.push("<b>opening_hours</b> = " + openingHours + "<br> <em>(Greška parsiranja: " + err + ")</em>");
     }
-    section(payment, 'Možnosti platby:');
-    section(contact, 'Kontakty:');
-    section(building, 'Budova:');
+    section(payment, 'Mogućnosti plaćanja:');
+    section(contact, 'Kontakti:');
+    section(building, 'Zgrada:');
 
     // Finish there when we are inside popup
     if (embedded) {
@@ -274,7 +274,7 @@ osmcz.poiPopup.getHtml = function (feature, icon, embedded) {
     }
 
     //tpl.push('<div class="osmid"><a href="http://osm.org/' + osm_type + '/' + id + '">osm ID: ' + osm_type + '/' + id + '</a></div>');
-    tpl.push('<div class="osmid"><a href="https://osmap.cz/' + osm_type + '/' + id + '">osmap.cz/' + osm_type + '/' + id + '</a></div>');
+    tpl.push('<div class="osmid"><a href="https://openstreetmap.ba/' + osm_type + '/' + id + '">openstreetmap.ba/' + osm_type + '/' + id + '</a></div>');
     tpl.push('<div id="wikimedia-commons" data-osm-id="' + id + '"></div>');
     tpl.push('<div id="guidepost" data-osm-id="' + id + '"></div>');
     tpl.push('<div id="mapillary-photo" data-osm-id="' + id + '"></div>');
@@ -292,7 +292,7 @@ osmcz.poiPopup.getHtml = function (feature, icon, embedded) {
     }
 
     // url of ajax proxy server for wikipedia and wikimedia (CORS not HTTPS)
-    var xhd_proxy_url = 'https://openstreetmap.cz/xhr_proxy.php';
+    var xhd_proxy_url = 'https://openstreetmap.ba/xhr_proxy.php';
 
     // Show picture from wikimedia commons if there is `wikidata` or `wikimedia_commons` or `wikipedia` tag
     // Priorities:
@@ -369,7 +369,7 @@ osmcz.poiPopup.getHtml = function (feature, icon, embedded) {
 
         // Template
         var wcmTpl = '<h5><a href="https://commons.wikimedia.org/">'
-            + '<img class="commons_logo" src="' + osmcz.basePath + 'img/commons_logo.png" height="24"></a>'
+            + '<img class="commons_logo" src="' + osmba.basePath + 'img/commons_logo.png" height="24"></a>'
             + 'Foto z Wikipedie</h5>'
             + '<a href="_descriptionshorturl">'
             + '<img src="_thumburl" >'
@@ -397,7 +397,7 @@ osmcz.poiPopup.getHtml = function (feature, icon, embedded) {
     // -----------------  GUIDEPOST -----------------
 
 
-    // show guidepost picture from openstreetmap.cz
+    // show guidepost picture from openstreetmap.ba
     if (feature.properties.tags.information == 'guidepost') {
         if (feature.guidepost) {
             setTimeout(function () { //after dom is created
@@ -407,7 +407,7 @@ osmcz.poiPopup.getHtml = function (feature, icon, embedded) {
         else {
             var ref = feature.properties.tags.ref;
             $.ajax({
-                url: osmcz.photoDbUrl + 'api/close',
+                url: osmba.photoDbUrl + 'api/close',
                 data: {
                     lat: lat,
                     lon, lon,
@@ -423,14 +423,14 @@ osmcz.poiPopup.getHtml = function (feature, icon, embedded) {
         }
     }
 
-    var gpTpl = '<h5>Foto rozcestníku</h5>'
+    var gpTpl = '<h5>Foto putokaza</h5>'
         + '<a href="_imgUrl">'
         + '<div id="thumbnailLoadSpinner" class="text-center"><span class="glyphicon glyphicon-refresh text-info gly-spin"></span><br></div>'
         + '<img id="thumbnailImage" src="" class="center-block"/>'
         + '</a>'
         + '<div class="margin-top-05"><b>Fotografii poskytl: </b> _autor'
         + '<span style="margin: 0.5em"/>'
-        + ' <a href="'+osmcz.photoDbUrl+'?id=_id" target="_blank" class="btn btn-default btn-xs">'
+        + ' <a href="'+osmba.photoDbUrl+'?id=_id" target="_blank" class="btn btn-default btn-xs">'
         + '   <span class="glyphicon glyphicon-pencil" title="upravit"></span> upravit</a>'
         + '</div>'
 
@@ -442,19 +442,19 @@ osmcz.poiPopup.getHtml = function (feature, icon, embedded) {
                 return;
             var autor = feature.guidepost.features[0].properties.author;
             var gpostId = feature.guidepost.features[0].properties.id;
-            var fullImgUrl = osmcz.photoDbUrl + 'files/' + gpostId + '.jpg';
+            var fullImgUrl = osmba.photoDbUrl + 'files/' + gpostId + '.jpg';
             gp.html(gpTpl.replace(/_autor/g, autor).replace(/_imgUrl/g, fullImgUrl).replace(/_id/g, gpostId));
 
             // get guidepost thumbnail from photodb cache server first
             // if it fails, request it from phpThumb
             var tb = new Image();
-            tb.src = osmcz.photoDbUrl + "files/250px/" + gpostId + '.jpg';
+            tb.src = osmba.photoDbUrl + "files/250px/" + gpostId + '.jpg';
             tb.onload = function () {
                 $('#thumbnailLoadSpinner').hide();
                 $('#thumbnailImage').attr('src', tb.src);
             };
             tb.onerror = function () {
-                $('#thumbnailLoadSpinner').html('<br><span class="glyphicon glyphicon-picture bigger semigrey thumbnail crossed" title="Náhled není k dispozici."><span><br>');
+                $('#thumbnailLoadSpinner').html('<br><span class="glyphicon glyphicon-picture bigger semigrey thumbnail crossed" title="Pretpregled nije dostupan."><span><br>');
                 $('#thumbnailLoadSpinner').attr('class', 'text-nowrap text-center');
 
             };
@@ -465,7 +465,7 @@ osmcz.poiPopup.getHtml = function (feature, icon, embedded) {
     // -----------------  MAPILLARY -----------------
 
     // show closest mapillary photo if no photo so far
-    if (osmcz.permanentlyDisplayed) {
+    if (osmba.permanentlyDisplayed) {
         if (!feature.wikimedia && !feature.wikipedia && !feature.guidepost) {
             //TODO WP tag != existing WP photo --> chain mapillary after the WP request?
 
@@ -490,10 +490,10 @@ osmcz.poiPopup.getHtml = function (feature, icon, embedded) {
         }
     }
 
-    // "_key" se nahrazuje mapillary IDčkem
-    var mpTpl = '<h5>Nejbližší street-view</h5>'
+    // "_key" se zamjenjuje sa mapillary ID-om
+    var mpTpl = '<h5>Najbliži street-view</h5>'
         + '<a href="https://www.mapillary.com/map/im/_key/photo">'
-        + '<img src="' + osmcz.fakeHttps + 'images.mapillary.com/_key/thumb-320.jpg" height="187">'  //@todo https viz https://github.com/mapillary/mapillary_issues/issues/2419
+        + '<img src="' + osmba.fakeHttps + 'images.mapillary.com/_key/thumb-320.jpg" height="187">'  //@todo https viz https://github.com/mapillary/mapillary_issues/issues/2419
         + '</a>';
 
     function showMapillary() {

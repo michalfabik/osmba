@@ -13,8 +13,8 @@
         <table class="table table-hover">
             <tr>
             <th>OSM id
-            <th>počet editací
-            <th><a href='/skoleni/stats?o=e'>datum eventu</a>
+            <th>broj izmjena
+            <th><a href='/obuka/stats?o=e'>datum događaja</a>
             {foreach $q as $r}
                 {? $reg = date('j.n.Y', strtotime($r->registred));
                     if ($reg == '16.9.2015') $reg = '17.9.2015 I.';
@@ -32,8 +32,8 @@
                     <table class="table table-hover">
                     <tr>
                     <th>OSM id
-                    <th>počet editací
-                    <th>datum eventu
+                    <th>broj izmjena
+                    <th>datum događaja
                 {/if}
             {/foreach}
         </table>
