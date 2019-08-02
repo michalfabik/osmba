@@ -18,7 +18,7 @@ jQuery.extend({
         },
 
         success: function (payload) {
-            //if (!payload) alert('neni payload'); //TODO fakt se někdy děje? user-unfriendly!
+            //if (!payload) alert('neni payload'); //TODO ovo se ozbiljno dešava? user-unfriendly!
 
             //alert
             if (payload.message) {

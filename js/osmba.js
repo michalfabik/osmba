@@ -1,10 +1,10 @@
-var OSMCZ_APP_VERSION = '0.26';
+var OSMBA_APP_VERSION = '0.26';
 
-var osmcz = osmcz || {};
-osmcz.setMarkerFromParams = setMarkerFromParams;
-osmcz.userMarker = false; // for linking: osmap.cz/?mlat=50.79&mlon=15.16&zoom=17
-osmcz.defaultLayer = null; // Store default layer there
-osmcz.apiTagsMap = new Map(); // List of API supported tags
+var osmba = osmba || {};
+osmba.setMarkerFromParams = setMarkerFromParams;
+osmba.userMarker = false; // for linking: osmap.ba/?mlat=50.79&mlon=15.16&zoom=17
+osmba.defaultLayer = null; // Store default layer there
+osmba.apiTagsMap = new Map(); // List of API supported tags
 
 var map, baseLayers = {}, overlays = {}, controls = {};
 var guideposts, gpcheck;
@@ -18,21 +18,21 @@ function initmap() {
 
     L.control.condensedAttribution({
         emblem: '<div class="emblem-wrap glyphicon glyphicon-info-sign"></div>',
-        prefix: "<a href='https://github.com/osmcz/osmcz' title='Projekt na Githubu'><img src='https://github.com/favicon.ico' width='10' style='margin-right:1ex'>osmcz-app</a> " + OSMCZ_APP_VERSION
+        prefix: "<a href='https://github.com/osmba/osmba' title='Projekt na Githubu'><img src='https://github.com/favicon.ico' width='10' style='margin-right:1ex'>osmba-app</a> " + OSMBA_APP_VERSION
     }).addTo(map);
 
     // -------------------- Sidebars --------------------
-    osmcz.sidebar = sidebar = L.control.sidebar('sidebar', {
+    osmba.sidebar = sidebar = L.control.sidebar('sidebar', {
         position: 'left',
         autoPan: false
     }).addTo(map);
 
-    osmcz.poiSidebar = poiSidebar = L.control.sidebar('poi-sidebar', {
+    osmba.poiSidebar = poiSidebar = L.control.sidebar('poi-sidebar', {
         position: 'left',
         autoPan: false
     }).addTo(map);
 
-    osmcz.layersSidebar = layersSidebar = L.control.sidebar('map-layers', {
+    osmba.layersSidebar = layersSidebar = L.control.sidebar('map-layers', {
         position: 'right',
         closeButton: true,
         autoPan: false
@@ -40,10 +40,10 @@ function initmap() {
 
 
     // -------------------- map layers --------------------
-    new osmcz.layers(map, baseLayers, overlays, controls);
+    new osmba.layers(map, baseLayers, overlays, controls);
 
     // -------------------- map controls --------------------
-    new osmcz.controls(map, baseLayers, overlays, layersSidebar, controls);
+    new osmba.controls(map, baseLayers, overlays, layersSidebar, controls);
 
     // Restore previous state or expand base group by default
     if (Cookies.get("_ls_expanded_groups")) {
@@ -56,17 +56,17 @@ function initmap() {
     L1:
     for (group in baseLayers) {
         for (layer in baseLayers[group]) {
-            if (baseLayers[group][layer].options && baseLayers[group][layer].options.osmczDefaultLayer) {
-                osmcz.defaultLayer = baseLayers[group][layer];
+            if (baseLayers[group][layer].options && baseLayers[group][layer].options.osmbaDefaultLayer) {
+                osmba.defaultLayer = baseLayers[group][layer];
                 break L1;
             }
         }
     }
 
     // -------------------- modules --------------------
-    guideposts = new osmcz.guideposts(map, baseLayers, overlays, controls, "Turistické");
-    gpcheck = new osmcz.gpcheck(map, baseLayers, overlays, controls, "Speciální");
-    popup = new osmcz.poiPopup(map);
+    guideposts = new osmba.guideposts(map, baseLayers, overlays, controls, "Turistické");
+    gpcheck = new osmba.gpcheck(map, baseLayers, overlays, controls, "Speciální");
+    popup = new osmba.poiPopup(map);
 
     // -------------------- map state --------------------
 
@@ -133,11 +133,11 @@ function initmap() {
 
     // hide splash on map-click or map-move or layers-shown
     map.on('click movestart', closeSplash);
-    osmcz.layersSidebar.on('show', function () {
+    osmba.layersSidebar.on('show', function () {
         container.toggleClass("layersSidebar-shown", true);
         closeSplash();
     });
-    osmcz.layersSidebar.on('hide', function () {
+    osmba.layersSidebar.on('hide', function () {
         container.toggleClass("layersSidebar-shown", false);
     });
 
@@ -200,30 +200,30 @@ function setMarkerFromParams(params) {
         // popup.push("<div class='text-right small'>upravit | odebrat</div>");
         popup.push("</div>");
 
-        if (osmcz.userMarker) {
-            osmcz.userMarker.removeFrom(map);
+        if (osmba.userMarker) {
+            osmba.userMarker.removeFrom(map);
         }
 
-        osmcz.userMarker = L.marker([params.mlat, params.mlon], { title: "Odkaz na místo" });
-        osmcz.userMarker.bindPopup(popup.join('')).openPopup();
+        osmba.userMarker = L.marker([params.mlat, params.mlon], { title: "Odkaz na místo" });
+        osmba.userMarker.bindPopup(popup.join('')).openPopup();
 
-        osmcz.userMarker.on("add", function (event) {
+        osmba.userMarker.on("add", function (event) {
             event.target.openPopup();
         });
-        osmcz.userMarker.on("popupclose", function (event) {
-            // event.target.removeFrom(map) .. tohle ne, zavíralo by se při každém kliku do mapy
+        osmba.userMarker.on("popupclose", function (event) {
+            // event.target.removeFrom(map) .. ovo ne može, zatvaralo bi se sa svakim klikom na mapi
         });
-        osmcz.userMarker.addTo(map);
+        osmba.userMarker.addTo(map);
     }
 }
 
 function loadPoiFromParams(params) {
     if (params.object)
-        osmcz.poiPopup.load(params.object);
+        osmba.poiPopup.load(params.object);
 
     var loadObject = /^\/(node|way|relation)\/(\d+)$/.exec(location.pathname);
     if (loadObject)
-        osmcz.poiPopup.load({ type: loadObject[1], id: loadObject[2] });
+        osmba.poiPopup.load({ type: loadObject[1], id: loadObject[2] });
 }
 
 function updateLayersFromCode(codedString) {
@@ -247,7 +247,7 @@ function updateLayersFromCode(codedString) {
 
     // blank code or having only UPPERCASE = overlays --> display default layer
     if (!codedString || !codedString.match(/[a-z]/)) {
-        map.addLayer(osmcz.defaultLayer);
+        map.addLayer(osmba.defaultLayer);
     } else {
         for (group in baseLayers) {
             for (layer in baseLayers[group]) {
@@ -256,7 +256,7 @@ function updateLayersFromCode(codedString) {
             }
         }
         if (!baseLayerSelected)
-            map.addLayer(osmcz.defaultLayer);
+            map.addLayer(osmba.defaultLayer);
     }
 
     for (group in overlays) {

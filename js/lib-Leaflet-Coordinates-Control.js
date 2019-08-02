@@ -34,7 +34,7 @@ L.Control.Coordinates = L.Control.extend({
 
         this._addText(container, map);
 
-        L.DomEvent.addListener(container, 'click', function () { // zobrazeni GPS popupu
+        L.DomEvent.addListener(container, 'click', function () { // prikaz GPS popupa
             var lat = L.DomUtil.get(that._lat),
                 lng = L.DomUtil.get(that._lng),
                 gps = L.DomUtil.get(that._gps),
@@ -51,11 +51,11 @@ L.Control.Coordinates = L.Control.extend({
                 lngCoordinateDMS = DDToDMS(lngCoordinate, 0, "lon", true)
             ;
 
-            var coorsText = "<h4>GPS souřadnice</h4>";
+            var coorsText = "<h4>GPS koordinati</h4>";
             coorsText += '<div class="gpsCoor">' + latCoordinate + " " + lngCoordinate + "</div>";
             coorsText += '<div class="gpsCoor">' + latCoordinateDM + " " + lngCoordinateDM + "</div>";
             coorsText += '<div class="gpsCoor">' + latCoordinateDMS + " " + lngCoordinateDMS + "</div>";
-            coorsText += '<div class="gpsCoor text-right"><a href="'+link+'" class="btn btn-default btn-sm"">vytvořit značku</a></div>';
+            coorsText += '<div class="gpsCoor text-right"><a href="'+link+'" class="btn btn-default btn-sm"">označiti preciznu lokaciju</a></div>';
 
             L.DomUtil.get(this._gps).innerHTML = coorsText;
             L.DomUtil.get(this._icon).innerHTML = "";
@@ -65,7 +65,7 @@ L.Control.Coordinates = L.Control.extend({
                     marker: true,
                     mlat: latCoordinate,
                     mlon: lngCoordinate,
-                    mmsg: 'Odkaz na místo<br><a href="https://osmap.cz'+link+'" class="small">osmap.cz'+link+'</a>'
+                    mmsg: 'Link na mjesto<br><a href="https://openstreetmap.ba'+link+'" class="small">openstreetmap.ba'+link+'</a>'
                 });
                 history.pushState({}, "", link.replace(/&amp;/g, '&'));
                 return false;

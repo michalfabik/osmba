@@ -1,21 +1,21 @@
 // (c) 2016 osmcz-app, https://github.com/osmcz/osmcz
 
-var osmcz = osmcz || {};
-osmcz.iconsService = {};
+var osmba = osmba || {};
+osmba.iconsService = {};
 
 
 //maki icons base url  //https://cdn.rawgit.com/mapbox/maki/v0.5.0/renders/
-osmcz.iconsService.baseUrl = 'https://cdn.rawgit.com/osmcz/maki/osmcz_v1/renders/';
+osmba.iconsService.baseUrl = 'https://cdn.rawgit.com/osmcz/maki/osmcz_v1/renders/';
 
 
 //icon getter for specific tag set
-osmcz.iconsService.get = function (tags) {
+osmba.iconsService.get = function (tags) {
     var name = false;
 
     // match tags to icons.table
     for (var k in tags) {
         var v = tags[k];
-        var row = osmcz.iconsService.table[k]; //indexed by tag key
+        var row = osmba.iconsService.table[k]; //indexed by tag key
 
         if (row && row[v])  //column by tag value
             name = row[v];
@@ -57,8 +57,8 @@ osmcz.iconsService.get = function (tags) {
     }
 
     return L.icon({
-        iconUrl: osmcz.iconsService.baseUrl + iconPath + '.png',
-        iconRetinaUrl: osmcz.iconsService.baseUrl + iconPath + '@2x.png',
+        iconUrl: osmba.iconsService.baseUrl + iconPath + '.png',
+        iconRetinaUrl: osmba.iconsService.baseUrl + iconPath + '@2x.png',
         iconSize: size,
         popupAnchor: [0, -9]
     });
@@ -66,7 +66,7 @@ osmcz.iconsService.get = function (tags) {
 };
 
 //The later - the more priority https://www.mapbox.com/maki/
-osmcz.iconsService.table = {
+osmba.iconsService.table = {
     amenity: {
         restaurant: 'restaurant',
         fuel: 'fuel',

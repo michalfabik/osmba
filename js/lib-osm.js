@@ -102,7 +102,7 @@ OSM = {
             mapParams.lon = parseFloat(params.mlon);
             mapParams.lat = parseFloat(params.mlat);
             mapParams.zoom = parseInt(params.zoom || 12);
-        } else if (loc = Cookies.get('_osm_location')) {  //edit osmcz
+        } else if (loc = Cookies.get('_osm_location')) {  //edit osmba
             loc = loc.split("|");
             mapParams.lon = parseFloat(loc[0]);
             mapParams.lat = parseFloat(loc[1]);
@@ -110,7 +110,7 @@ OSM = {
         } else if (OSM.home) {
             mapParams.lon = OSM.home.lon;
             mapParams.lat = OSM.home.lat;
-            mapParams.zoom = OSM.home.zoom; //edit osmcz
+            mapParams.zoom = OSM.home.zoom; //edit osmba
         } else if (OSM.location) {
             mapParams.bounds = L.latLngBounds(
                 [OSM.location.minlat,

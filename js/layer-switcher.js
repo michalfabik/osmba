@@ -4,7 +4,7 @@
  https://raw.githubusercontent.com/Leaflet/Leaflet/v0.7.7/src/control/Control.Layers.js
  */
 
-osmcz.LayerSwitcher = L.Control.extend({
+osmba.LayerSwitcher = L.Control.extend({
     options: {
         collapsed: true,
         position: 'topright',
@@ -23,7 +23,7 @@ osmcz.LayerSwitcher = L.Control.extend({
         this._cntActiveInGroup = {}; // Store number of active layers per group
         this._lastZIndex = 0;
         this._handlingClick = false;
-        this._defaultLayer = null; // default layer - set from layer.options.osmczDefaultLayer
+        this._defaultLayer = null; // default layer - set from layer.options.osmbaDefaultLayer
 
         this._lastLayerId = 0;
         this._layersIdMap = {}; // Mapping between internal layer ID and Leaflet object ID
@@ -256,14 +256,14 @@ osmcz.LayerSwitcher = L.Control.extend({
 //         inCnt.push('  <button type="button" class="close"><span aria-hidden="true">&times;</span></button>');
         inCnt.push('  <div class="clearfix">');
         inCnt.push('    <div id="ls-info" class="btn-group inline navbar-default">');
-        inCnt.push('      <a class="btn btn-header" data-toggle="collapse" data-target="#lsinfo" title="O vrstvách">Vrstvy <span class="glyphicon glyphicon-question-sign small"></a>');
+        inCnt.push('      <a class="btn btn-header" data-toggle="collapse" data-target="#lsinfo" title="O slojevima">Slojevi <span class="glyphicon glyphicon-question-sign small"></a>');
         inCnt.push('    </div>');
         inCnt.push('  </div>');
         inCnt.push('  <div id="lsinfo" class="ls-info-body collapse">');
-        inCnt.push('    <p class="text-center"><strong>Mapové vrstvy jsou to, co <em>OpenStreetMap</em> odlišuje.</strong></p>');
-        inCnt.push('    <p class="text-justify">Jedna mapová databáze může být vykreslena v různých stylech a pro různé užití. Jako mapa města, pro turistiku či lyžování.<br>Navštivte naši <a href="galerie">galerii.</a></p>');
-        inCnt.push('    <p>Pod tlačítkem <span class="btn btn-default btn-xs glyphicon glyphicon-calendar disabled"></span> najdete další vrstvy.</p>');
-        inCnt.push('    <p class="text-center"><button class="btn btn-sm btn-info" data-toggle="collapse" data-target="#lsinfo" onclick=\'Cookies.set("_ls_info_hide", "yes", {expires: 90})\'>Skrýt</button></p>');
+        inCnt.push('    <p class="text-center"><strong>Slojevi mape su ono po čemu se <em>OpenStreetMap</em> razlikuje.</strong></p>');
+        inCnt.push('    <p class="text-justify">Jedna baza geografskih podataka može biti prikazana sa raznim stilovima za razne primjene. Kao karta grada, za planinarenje ili skijanje.<br>Posjetite našu <a href="galerija">galeriju.</a></p>');
+        inCnt.push('    <p>Pod dugmetom <span class="btn btn-default btn-xs glyphicon glyphicon-calendar disabled"></span> ćete naći druge slojeve.</p>');
+        inCnt.push('    <p class="text-center"><button class="btn btn-sm btn-info" data-toggle="collapse" data-target="#lsinfo" onclick=\'Cookies.set("_ls_info_hide", "yes", {expires: 90})\'>Sakriti</button></p>');
         inCnt.push('  </div>');
         inCnt.push('  <div id="map-layers-content">');
         inCnt.push('  </div>');
@@ -279,7 +279,7 @@ osmcz.LayerSwitcher = L.Control.extend({
         if (this.options.collapsed) {
             if (!L.Browser.android) {
                 L.DomEvent
-                    .on(container, 'click', this._expand, this)  //osmcz
+                    .on(container, 'click', this._expand, this)  //osmba
                     .on(container, 'mouseout', this._collapse, this);
             }
 
@@ -331,7 +331,7 @@ osmcz.LayerSwitcher = L.Control.extend({
         this._btnExpandAll = document.createElement('button');
         this._btnExpandAll.className = 'btn btn-secondary btn-default btn-xs';
         this._btnExpandAll.setAttribute('type', 'button');
-        this._btnExpandAll.setAttribute('title', 'Rozbalit vše');
+        this._btnExpandAll.setAttribute('title', 'Proširiti sve');
         this._btnExpandAll.setAttribute('id', 'btnExpandAll');
         this._btnExpandAll.setAttribute("onclick", "controls.layers.expandAllGroups();");
         this._btnExpandAll.innerHTML = '<i class="glyphicon glyphicon-eject flip"></i>';
@@ -340,7 +340,7 @@ osmcz.LayerSwitcher = L.Control.extend({
         this._btnCollapseAll = document.createElement('button');
         this._btnCollapseAll.className = 'btn btn-secondary  btn-default btn-xs';
         this._btnCollapseAll.setAttribute('type', 'button');
-        this._btnCollapseAll.setAttribute('title', 'Sbalit vše');
+        this._btnCollapseAll.setAttribute('title', 'Sažeti sve');
         this._btnCollapseAll.setAttribute('id', 'btnCollapseAll');
         this._btnCollapseAll.setAttribute("onclick", "controls.layers.collapseAllGroups();");
         this._btnCollapseAll.innerHTML = '<i class="glyphicon glyphicon-eject" ></i>';
@@ -353,7 +353,7 @@ osmcz.LayerSwitcher = L.Control.extend({
         this._btnSetting = document.createElement('button');
         this._btnSetting.className = 'btn btn-secondary  btn-default btn-xs pull-right hidden';
         this._btnSetting.setAttribute('type', 'button');
-        this._btnSetting.setAttribute('title', 'Nastavení');
+        this._btnSetting.setAttribute('title', 'Postavke');
         this._btnSetting.setAttribute('data-toggle', 'collapse');
         this._btnSetting.setAttribute('data-target', '#lssetup');
         this._btnSetting.innerHTML = '<i class="glyphicon glyphicon-cog" ></i>';
@@ -369,7 +369,7 @@ osmcz.LayerSwitcher = L.Control.extend({
         var labelBasic = document.createElement('label');
         labelBasic.className = 'btn btn-default' + (this._mode == 'basic' ? ' active' : '');
         labelBasic.setAttribute('onclick', 'controls.layers._switchLayerMode("basic")');
-        labelBasic.setAttribute('title', 'Základní vrstvy');
+        labelBasic.setAttribute('title', 'Osnovni slojevi');
 
         var inputBasic = document.createElement('input');
         inputBasic.className = 'btn-block';
@@ -388,7 +388,7 @@ osmcz.LayerSwitcher = L.Control.extend({
         var labelGroup = document.createElement('label');
         labelGroup.className = 'btn btn-default' + (this._mode == 'groups' ? ' active' : '');
         labelGroup.setAttribute('onclick', 'controls.layers._switchLayerMode("groups")');
-        labelGroup.setAttribute('title', 'Více vrstev ve skupinách');
+        labelGroup.setAttribute('title', 'Više slojeva u grupama');
 
         var inputGroup = document.createElement('input');
         inputGroup.className = 'btn-block ';
@@ -414,7 +414,7 @@ osmcz.LayerSwitcher = L.Control.extend({
         var lssetup = document.createElement('div');
         lssetup.className = "lssetup collapse";
         lssetup.setAttribute('id', 'lssetup');
-        lssetup.innerHTML = '<h3>Nastavení</h3><div>Tady bude nějaké nastavení.</div>';
+        lssetup.innerHTML = '<h3>Postavke</h3><div>Ovdje će biti neke postavke.</div>';
         this._form.appendChild(lssetup);
 
         this._separatorBtGroup = L.DomUtil.create('div', className + '-separator', form);
@@ -476,7 +476,7 @@ osmcz.LayerSwitcher = L.Control.extend({
             this.addGroup(group);
         }
 
-        if (!overlay && layer.options.osmczDefaultLayer)
+        if (!overlay && layer.options.osmbaDefaultLayer)
             this._defaultLayer = layer;
 
         if (this.options.autoZIndex && layer.setZIndex) {
@@ -592,7 +592,7 @@ osmcz.LayerSwitcher = L.Control.extend({
         var innerContent = [];
         if (obj.layer.options.removeBtn) {
             innerContent.push('<span class="ellipsis removable" title="' + obj.name + '">&nbsp;' + obj.name + '</span>');
-            innerContent.push('<a href="#" class="btn pull-right" title="Odebrat vrstvu"');
+            innerContent.push('<a href="#" class="btn pull-right" title="Oduzeti sloj"');
             innerContent.push('onclick="controls.layers.removeLayerByName(\'' + obj.name + '\');"');
             innerContent.push('>');
             innerContent.push('<span class="glyphicon glyphicon-trash text-danger" alt="X"></span></a>');
@@ -758,6 +758,6 @@ osmcz.LayerSwitcher = L.Control.extend({
 
 });
 
-osmcz.layerSwitcher = function (baseLayers, overlays, panel, options) {
-    return new osmcz.LayerSwitcher(baseLayers, overlays, panel, options);
+osmba.layerSwitcher = function (baseLayers, overlays, panel, options) {
+    return new osmba.LayerSwitcher(baseLayers, overlays, panel, options);
 };

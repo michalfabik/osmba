@@ -1,6 +1,6 @@
 /*
- guidepost check from OsmHiCheck for osmcz
- Javascript code for openstreetmap.cz website
+ guidepost check from OsmHiCheck for osmba
+ Javascript code for openstreetmap.ba website
  Copyright (C) 2015-2017
 
  This program is free software: you can redistribute it and/or modify
@@ -22,8 +22,8 @@ and
 
  */
 
-var osmcz = osmcz || {};
-osmcz.gpcheck = function (map, baseLayers, overlays, controls, group) {
+var osmba = osmba || {};
+osmba.gpcheck = function (map, baseLayers, overlays, controls, group) {
     // -- constructor --
 
     var layersControl = controls.layers;
@@ -39,22 +39,22 @@ osmcz.gpcheck = function (map, baseLayers, overlays, controls, group) {
     var openPopup;
 
     var gp_check_icon = L.icon({
-        iconUrl: osmcz.basePath + "img/gp_check_missing.png",
+        iconUrl: osmba.basePath + "img/gp_check_missing.png",
         iconSize: [48, 48],
         iconAnchor: [23, 45]
     });
     var gp_check_noref_icon = L.icon({
-        iconUrl: osmcz.basePath + "img/gp_check_noref.png",
+        iconUrl: osmba.basePath + "img/gp_check_noref.png",
         iconSize: [48, 48],
         iconAnchor: [23, 45]
     });
     var gp_check_noimg_icon = L.icon({
-        iconUrl: osmcz.basePath + "img/gp_check_noimg.png",
+        iconUrl: osmba.basePath + "img/gp_check_noimg.png",
         iconSize: [48, 48],
         iconAnchor: [23, 45]
     });
     var gp_check_tourism_icon = L.icon({
-        iconUrl: osmcz.basePath + "img/gp_check_tourism.png",
+        iconUrl: osmba.basePath + "img/gp_check_tourism.png",
         iconSize: [48, 48],
         iconAnchor: [23, 45]
     });
@@ -81,35 +81,35 @@ osmcz.gpcheck = function (map, baseLayers, overlays, controls, group) {
             var lat = feature.geometry.coordinates[1];
             var lon = feature.geometry.coordinates[0];
             html_content += '<div id="gpc-upload-img">';
-            html_content += '  <button id="gpc-upload-btn" type="button" class="btn btn-info fa-4x center-block" onclick="osmcz.gpcheck.openForm(' + osmid + ');return false;" title="Máte fotografii? Vložte ji prosím.">';
-            html_content += '     <div class="glyphicon glyphicon-plus-sign no-foto vcenter"></div><span style="margin-left: 10px"><strong>Vložit fotografii</strong></span>';
+            html_content += '  <button id="gpc-upload-btn" type="button" class="btn btn-info fa-4x center-block" onclick="osmba.gpcheck.openForm(' + osmid + ');return false;" title="Imate sliku? Pošaljite nam je.">';
+            html_content += '     <div class="glyphicon glyphicon-plus-sign no-foto vcenter"></div><span style="margin-left: 10px"><strong>Poslati sliku</strong></span>';
             html_content += '  </button>';
             html_content += '</div>';
 
             // List of missing thinks
             html_content += '<div id="gpc-missing"><br/>';
             if (feature.properties.class == 'missing') {
-                html_content += ('<span class="glyphicon glyphicon-remove text-danger"></span> chybí tag ref<br/>');
-                html_content += ('<span class="glyphicon glyphicon-remove text-danger"></span> chybí foto<br/>');
+                html_content += ('<span class="glyphicon glyphicon-remove text-danger"></span> nedostaje tag ref<br/>');
+                html_content += ('<span class="glyphicon glyphicon-remove text-danger"></span> nedostaje slika<br/>');
             }
             if (feature.properties.class == 'noref') {
-                html_content += ('<span class="glyphicon glyphicon-remove text-danger"></span> chybí tag ref<br/>');
-                html_content += ('<span class="glyphicon glyphicon-remove text-danger"></span> nepoužité/vadné foto<br/>');
+                html_content += ('<span class="glyphicon glyphicon-remove text-danger"></span> nedostaje tag ref<br/>');
+                html_content += ('<span class="glyphicon glyphicon-remove text-danger"></span> nekorištena/nekvalitetna slika<br/>');
             }
             if (feature.properties.class == 'noimg') {
-                html_content += ('<span class="glyphicon glyphicon-remove text-danger"></span> chybí foto<br/>');
+                html_content += ('<span class="glyphicon glyphicon-remove text-danger"></span> nedostaje slika<br/>');
             }
             if (feature.properties.class == 'tourism') {
-		html_content += ('<span class="glyphicon glyphicon-remove text-danger"></span> jen tourism=info<br/>');
+		html_content += ('<span class="glyphicon glyphicon-remove text-danger"></span> samo tourism=info<br/>');
             }
             html_content += '</div>';
 
             // Data in OSM - element is filled during popup open event
             html_content += '<div id="gp-check" gp-check-id=' + feature.id + '>';
-            html_content += '<br/><span class="glyphicon glyphicon-refresh text-info gly-spin"></span> Načítám podrobnosti z OSM.org</div>';
+            html_content += '<br/><span class="glyphicon glyphicon-refresh text-info gly-spin"></span> Učitavanje detalja sa OSM.org</div>';
 
-            // Links to node on osmap.cz and osm.org
-            html_content += '<br/><div class="osmid"><a href="https://osmap.cz/node/' + feature.id + '">osmap.cz/node/' + feature.id + '</a>';
+            // Links to node on osmap.ba and osm.org
+            html_content += '<br/><div class="osmid"><a href="https://openstreetmap.ba/node/' + feature.id + '">openstreetmap.ba/node/' + feature.id + '</a>';
             html_content += ' | <a href="https://openstreetmap.org/node/' + feature.id + '">OSM.org</a><br/>';
 
             // Edit in iD button
@@ -120,7 +120,7 @@ osmcz.gpcheck = function (map, baseLayers, overlays, controls, group) {
 
             // Edit in JOSM/Merkaartor button
             html_content += '  <a href="#"><button type="button" class="btn btn-default btn-xs"';
-            html_content += '   onclick="osmcz.gpcheck.callRemoteEditor(' + feature.geometry.coordinates + ')">';
+            html_content += '   onclick="osmba.gpcheck.callRemoteEditor(' + feature.geometry.coordinates + ')">';
             html_content += '  <div class="glyphicon glyphicon-pencil"></div> JOSM / Merkaartor';
             html_content += '  </button></a>';
             html_content += '  </div>';
@@ -194,7 +194,7 @@ osmcz.gpcheck = function (map, baseLayers, overlays, controls, group) {
             success: function (data) {
 //                 console.log("loaded xml", data);
 
-                osmcz.permanentlyDisplayed = true;
+                osmba.permanentlyDisplayed = true;
 
                 var geojson = osm_geojson.osm2geojson(data);
                 var feature = geojson.features[0];
@@ -208,13 +208,13 @@ osmcz.gpcheck = function (map, baseLayers, overlays, controls, group) {
                 //show result
                 var gc = $('#gp-check');
                 if (osmid == gc.attr('gp-check-id')) {
-                    gc.html('<h6>Data v OSM</h6>' + osmcz.poiPopup.getHtml(feature, null, true));
+                    gc.html('<h6>Data v OSM</h6>' + osmba.poiPopup.getHtml(feature, null, true));
                     if ('ref' in tags) {
-                        osmcz.gpcheck.gpref = tags.ref;
+                        osmba.gpcheck.gpref = tags.ref;
                     }
 
                     if ('name' in tags) {
-                        osmcz.gpcheck.gpname = tags.name;
+                        osmba.gpcheck.gpname = tags.name;
                     }
                 }
             }
@@ -283,7 +283,7 @@ osmcz.gpcheck = function (map, baseLayers, overlays, controls, group) {
     }
 
     // TODO: separate this to some library
-    osmcz.gpcheck.callRemoteEditor = function (lon, lat) {
+    osmba.gpcheck.callRemoteEditor = function (lon, lat) {
         $.ajax
         ({
             url: 'http://127.0.0.1:8111/load_and_zoom', // @FIXME: cross-domain+HTTPS? https://josm.openstreetmap.de/ticket/10033
@@ -297,16 +297,16 @@ osmcz.gpcheck = function (map, baseLayers, overlays, controls, group) {
         });
     }
 
-    osmcz.gpcheck.openForm = function (osmid) {
+    osmba.gpcheck.openForm = function (osmid) {
         photoGuiForm = L.control.photoDbGui();
         photoGuiForm._map = map;
         photoGuiForm.positionMarkerVisible = false;
 
-        photoGuiForm.openSidebar(osmcz.gpcheck.gpref, osmcz.gpcheck.gpname);
+        photoGuiForm.openSidebar(osmba.gpcheck.gpref, osmba.gpcheck.gpname);
         openPopup.remove();
         openPopup = null;
-        osmcz.gpcheck.gpref = '';
-        osmcz.gpcheck.gpname = '';
+        osmba.gpcheck.gpref = '';
+        osmba.gpcheck.gpname = '';
     }
 
     function error_gj(data) {

@@ -1,9 +1,9 @@
 // (c) 2016 osmcz-app, https://github.com/osmcz/osmcz
 
 
-var osmcz = osmcz || {};
-osmcz.openingHoursService = {};
-osmcz.openingHoursService.getHtml = function (v) {
+var osmba = osmba || {};
+osmba.openingHoursService = {};
+osmba.openingHoursService.getHtml = function (v) {
 //     var opening_hours = require('opening_hours');
 
     if (!v)
@@ -41,10 +41,10 @@ osmcz.openingHoursService.getHtml = function (v) {
         var idxToday = "#" + getFormatedDate(new Date());
         var idxTomorrow = "#" + getFormatedDate(shiftDay((new Date()), 1));
 
-        var days = ["Neděle", "Pondělí", "Úterý", "Středa", "Čtvrtek", "Pátek", "Sobota", "Neděle"];
+        var days = ["Nedjelja", "Ponedjeljak", "Utorak", "Srijeda", "Četvrtak", "Petak", "Subota", "Nedjelja"];
         var specialDays = [];
-        specialDays[idxToday] = "Dnes";
-        specialDays[idxTomorrow] = "Zítra";
+        specialDays[idxToday] = "Danas";
+        specialDays[idxTomorrow] = "Sutra";
 
         idx = "#" + getFormatedDate(d);
         if (idx in specialDays)
@@ -119,7 +119,7 @@ osmcz.openingHoursService.getHtml = function (v) {
             if (idx in aOH) {
                 ret.push('<td><b>' + getDayName(idxDay) + '</b>: </td><td class="oh-times">' + aOH[idx].join(', ') + '</td></tr>');
             } else
-                ret.push("<td><b>" + getDayName(idxDay) + '</b>: </td><td class="oh-times">' + "zavřeno" + "</td></tr>");
+                ret.push("<td><b>" + getDayName(idxDay) + '</b>: </td><td class="oh-times">' + "zatvoreno" + "</td></tr>");
 
             idxDay = shiftDay(idxDay, 1);
             formatedDayFrom = getFormatedDate(idxDay);
@@ -154,19 +154,19 @@ osmcz.openingHoursService.getHtml = function (v) {
         case "open":
             if (diffChangeMin > 0 && diffChangeMin <= 60) {
                 ohClass = "ohlasthour";
-                ohStateFormated = "poslední hodina";
+                ohStateFormated = "posljednji sat";
             } else {
                 ohClass = "ohopen";
-                ohStateFormated = "otevřeno";
+                ohStateFormated = "otvoreno";
             }
             break;
         case "close":
             ohClass = "ohclosed";
-            ohStateFormated = "zavřeno";
+            ohStateFormated = "zatvoreno";
             break;
         case "unknown":
             ohClass = "";
-            ohStateFormated = "neznámo";
+            ohStateFormated = "nepoznato";
             break;
     }
 
@@ -181,7 +181,7 @@ osmcz.openingHoursService.getHtml = function (v) {
 
     // prepare opening hours table
     var ret = [];
-    ret.push('<h5 title="' + v + '">Otevírací hodiny');
+    ret.push('<h5 title="' + v + '">Radno vrijeme');
     ret.push(' <span class="' + ohClass + '">');
     ret.push('(' + ohStateFormated + ')</span>');
     ret.push(' <a href="#" onclick="if ($(\'.oh-extended\').is(\':visible\')) {$(\'.oh-toggle\').html(\'&#9660;\');} else {$(\'.oh-toggle\').html(\'&#9650;\');} $(\'.oh-extended\').toggle(200); return false"><span class="oh-toggle">&#9660;</span></a></h5>');

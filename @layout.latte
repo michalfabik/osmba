@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="cs">
+<html lang="bs">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="Web české komunity OpenStreetMap - mapy, kterou může kdokoliv upravovat. Vyzkoušejte naše mapy a projekty.">
+    <meta name="description" content="Web sajt OpenStreetMap zajednice u BiH - OpenStreetMap je mapa koju bilo ko može uređivati. Isprobajte naše mape i projekte.">
     <meta name="author" content="">
     <link rel="icon" href="/theme/img/favicon.png">
 
@@ -28,12 +28,12 @@
 <div id="modal-container"></div>
 
 <div n:if="$_SERVER['HTTP_HOST'] != 'openstreetmap.ba'" class="alert alert-warning" style="position:fixed;bottom:10px;z-index:9999;right:10px;padding:3px;">
-    <strong>POZOR!</strong>
-    Toto je <a href="https://github.com/osmcz/osmcz-web">testovací web OSMCZ</a>
+    <strong>PAŽNJA</strong>
+    Ovo je <a href="https://github.com/osmba/osmba-web">web sajt OSMBA za testiranje</a>
     {!str_replace('HEAD is now at ', '<br>', @file_get_contents(WWW_DIR . '/commit.txt'))}
     <br>
     <br>
-    Pro ostrou verzi, prosím, přejděte <br>
+    Zvaničnu verziju ćete naći <br>
     na <a href="https://openstreetmap.ba">openstreetmap.ba</a>.
     <button class="close close-overlay" onclick="$(this).parent().hide()">&times;</button>
 </div>
@@ -50,12 +50,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/" title="Přejít na úvodní stránku OpenStreetMap.ba">
+            <a class="navbar-brand" href="/" title="Preći na naslovnu stranu OpenStreetMap.ba">
                 <img src="/theme/img/osmba.60x60.png" width="30" height="30" alt="Logo OSM BiH">
                 <span>{($_SERVER['HTTP_HOST'] == 'openstreetmap.ba' ? 'OpenStreetMap.ba' : $_SERVER['HTTP_HOST'])}</span>
             </a>
 
-            <div id="page-restore-button" title="Ukázat stránku"></div>
+            <div id="page-restore-button" title="Prikazati stranicu"></div>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="main-navbar">
@@ -75,7 +75,7 @@
                             </ul>
                         </li>
                     {else}
-                    {var $active = in_array($row, $crumbs) || ($row->id == 29 && $_SERVER['REQUEST_URI'] == '/')} {* aktivovat splash i na "/" *}
+                    {var $active = in_array($row, $crumbs) || ($row->id == 29 && $_SERVER['REQUEST_URI'] == '/')} {* aktivirati splash i na "/" *}
                         <li n:class='$active ? active'>
                             <a href='{$row->link()}'>{$row->name}</a>
                         </li>
@@ -94,17 +94,17 @@
                             {/if}
                             <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a n:href=":Admin:Admin:">Administrace webu</a></li>
+                            <li><a n:href=":Admin:Admin:">Administracija sajta</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a><b>{$user->id}</b></a></li>
-                            <li><a n:href=":Admin:Admin:logout">Odhlášení</a></li>
+                            <li><a n:href=":Admin:Admin:logout">Odjava</a></li>
                         </ul>
                     {else}
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
                             <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                             <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a n:href="Oauth:login backUrl => $_SERVER['REQUEST_URI']">Přihlásit přes OSM.org</a></li>
+                            <li><a n:href="Oauth:login backUrl => $_SERVER['REQUEST_URI']">Prijaviti se preko OSM.org</a></li>
                         </ul>
                     {/if}
                 </li>
@@ -207,7 +207,7 @@
     <!-- ============ app ============ -->
     <link href="{!'/theme/css/map-style.css'|modified}" rel="stylesheet">
 
-    <script src="{!'/theme/js/osmcz-config.js'|modified}"></script>
+    <script src="{!'/theme/js/osmba-config.js'|modified}"></script>
     <script src="{!'/theme/js/osm-notes-layer.js'|modified}"></script>
     <script src="{!'/theme/js/lib-gps-formats-convert.js'|modified}"></script>
     <script src="{!'/theme/js/layers.js'|modified}"></script>
@@ -220,7 +220,7 @@
     <script src="{!'/theme/js/opening-hours-service.js'|modified}"></script>
     <script src="{!'/theme/js/poi-popup.js'|modified}"></script>
     <script src="{!'/theme/js/active-layer.js'|modified}"></script>
-    <script src="{!'/theme/js/osmcz.js'|modified}"></script>
+    <script src="{!'/theme/js/osmba.js'|modified}"></script>
     <!-- ============ /app ============ -->
 
     <script src="{!'/theme/js/jquery.nette.custom.js'|modified}"></script>
@@ -239,8 +239,8 @@
             });
         });
 
-        osmcz = osmcz || {};
-        osmcz.user = {$user->isLoggedIn() ? array('username' => @$user->identity->data['username']) : false};
+        osmba = osmba || {};
+        osmba.user = {$user->isLoggedIn() ? array('username' => @$user->identity->data['username']) : false};
 
     </script>
 

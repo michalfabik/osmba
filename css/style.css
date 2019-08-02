@@ -20,7 +20,7 @@ a:hover.as-text {
     opacity: 0.6;
 }
 
-/* Logo místo textu. Při vhodném místě se zobrazí i span. */
+/* Logo umjesto teksta. Ako ima mjesta, prikazuje se i span. */
 .navbar .navbar-brand {
     line-height: 50px;
     padding: 0 20px 0 10px;
@@ -60,7 +60,7 @@ a:hover.as-text {
 }
 
 @media (max-width: 285px) {
-    /* velikost navbaru se zobrazenym spanem */
+    /* veličina navbara sa prikazanim spanom */
     .navbar .navbar-brand span {
         display: none;
     }
@@ -244,7 +244,7 @@ a:hover.as-text {
 }
 
 #map-container a.leaflet-control-layers-toggle:before {
-    content: "Mapové vrstvy";
+    content: "Slojevi mape";
 }
 
 #map-container a.leaflet-control-layers-toggle:hover {
@@ -266,7 +266,7 @@ a:hover.as-text {
 }
 
 #map-container a.leaflet-control-photoDBbtn-text:before {
-    content: "Přidat obrázek";
+    content: "Dodati sliku";
 }
 
 #map-container a.leaflet-control-photoDBbtn-text:hover {
@@ -486,7 +486,7 @@ a:hover.as-text {
 }
 
 #poi-sidebar #mapillary-photo a:after {
-    content: "Mapillary.com - otevřené street-view";
+    content: "Mapillary.com - otvoreni street-view";
     color: #ccc;
     position: absolute;
     left: 4px;
@@ -1069,14 +1069,14 @@ a #photoDB-preview:hover {
 
 /* End of print @media print */
 
-/* Primárně pro účely splashe */
+/* Primarno za potrebe splasha */
 #main .jumbotron {
     border-radius: 0;
     text-align: center;
     margin-bottom: 0;
 }
 
-#main .jumbotron.transparent { /* jinde než splash */
+#main .jumbotron.transparent { /* osim splasha */
     background: transparent;
 }
 
@@ -1229,7 +1229,7 @@ a #photoDB-preview:hover {
     font-size: 80%;
 }
 
-/*3 úroveň menu*/
+/*3. nivo menija*/
 #main .nav.nav-tabs {
     padding-top: 1em;
 }
