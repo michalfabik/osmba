@@ -18,7 +18,7 @@ function initmap() {
 
     L.control.condensedAttribution({
         emblem: '<div class="emblem-wrap glyphicon glyphicon-info-sign"></div>',
-        prefix: "<a href='https://github.com/osmba/osmba' title='Projekt na Githubu'><img src='https://github.com/favicon.ico' width='10' style='margin-right:1ex'>osmba-app</a> " + OSMBA_APP_VERSION
+        prefix: "<a href='https://github.com/osm-ba/osmba' title='Projekt na Githubu'><img src='https://github.com/favicon.ico' width='10' style='margin-right:1ex'>osmba-app</a> " + OSMBA_APP_VERSION
     }).addTo(map);
 
     // -------------------- Sidebars --------------------
@@ -64,14 +64,14 @@ function initmap() {
     }
 
     // -------------------- modules --------------------
-    guideposts = new osmba.guideposts(map, baseLayers, overlays, controls, "Turistické");
-    gpcheck = new osmba.gpcheck(map, baseLayers, overlays, controls, "Speciální");
+    guideposts = new osmba.guideposts(map, baseLayers, overlays, controls, "Turizam");
+    gpcheck = new osmba.gpcheck(map, baseLayers, overlays, controls, "Specijalizirani");
     popup = new osmba.poiPopup(map);
 
     // -------------------- map state --------------------
 
     // location is set from: npress-variable OR hash OR cookie OR default home
-    OSM.home = {lat: 49.8, lon: 15.44, zoom: 8};
+    OSM.home = {lat: 43.8, lon: 18.09, zoom: 9};
     var params = OSM.mapParams();
     if (window.__npress_page_osm_params__) Object.assign(params, window.__npress_page_osm_params__);
 
