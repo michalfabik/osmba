@@ -35,7 +35,7 @@ osmba.controls = function (map, baseLayers, overlays, layersPanel, controls) {
         autoCollapse: true,
         minLength: 2,
         zoom: 14,
-        textPlaceholder: 'Hledat…'
+        textPlaceholder: 'Traži…'
     });
     controls.search.addTo(map);
 

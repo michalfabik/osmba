@@ -261,7 +261,7 @@ osmba.LayerSwitcher = L.Control.extend({
         inCnt.push('  </div>');
         inCnt.push('  <div id="lsinfo" class="ls-info-body collapse">');
         inCnt.push('    <p class="text-center"><strong>Slojevi mape su ono po čemu se <em>OpenStreetMap</em> razlikuje.</strong></p>');
-        inCnt.push('    <p class="text-justify">Jedna baza geografskih podataka može biti prikazana sa raznim stilovima za razne primjene. Kao karta grada, za planinarenje ili skijanje.<br>Posjetite našu <a href="galerija">galeriju.</a></p>');
+        inCnt.push('    <p class="text-justify">Jedna baza geografskih podataka može biti prikazana u raznim stilovima za razne primjene. Kao karta grada, za planinarenje ili skijanje.<br>Posjetite našu <a href="galerija">galeriju.</a></p>');
         inCnt.push('    <p>Pod dugmetom <span class="btn btn-default btn-xs glyphicon glyphicon-calendar disabled"></span> ćete naći druge slojeve.</p>');
         inCnt.push('    <p class="text-center"><button class="btn btn-sm btn-info" data-toggle="collapse" data-target="#lsinfo" onclick=\'Cookies.set("_ls_info_hide", "yes", {expires: 90})\'>Sakriti</button></p>');
         inCnt.push('  </div>');

@@ -226,11 +226,11 @@ osmba.gpcheck = function (map, baseLayers, overlays, controls, group) {
     });
 
     /* Add overlay to the map */
-    layersControl.addOverlay(check_markers, "Kontroly OsmHiCheck", group);
+    layersControl.addOverlay(check_markers, "OsmHiCheck kontrole", group);
 
     /* Add overlay to the overlays list as well
      * This allows restoration of overlay state on load */
-    overlays[group]["Kontroly OsmHiCheck"] = check_markers;
+    overlays[group]["OsmHiCheck kontrole"] = check_markers;
 
     // -- methods --
 
