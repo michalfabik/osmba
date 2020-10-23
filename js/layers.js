@@ -256,13 +256,8 @@ osmba.layers = function (map, baseLayers, overlays, controls) {
         code: 'X'
     });
 
-<<<<<<< HEAD
-    var lpisOverlay = L.tileLayer.wms(osmba.fakeHttps + 'eagri.cz/public/app/wms/plpis.fcgi', {
-        layers: 'LPIS_FB4,LPIS_FB4_KOD',
-=======
     var lpisOverlay = L.tileLayer.wms('https://eagri.cz/public/app/wms/public_DPB_PB_OPV.fcgi', {
         layers: 'DPB_UCINNE,DPB_UCINNE_KOD',
->>>>>>> d6c122e5d3ad07297fd9e8c16debfba50e580994
         format: 'image/png',
         transparent: true,
         crs: L.CRS.EPSG4326,
@@ -332,7 +327,6 @@ osmba.layers = function (map, baseLayers, overlays, controls) {
     baseLayers["Osnovno"]["Mapbox streets"] = mapbox;
     baseLayers["Osnovno"]["OpenStreetMap Mapnik"] = osm;
     baseLayers["Osnovno"]["OpenTopoMap"] = opentopomap;
-    baseLayers["Osnovno"]["Metropolis"] = metropolis;
     baseLayers["Osnovno"]["Manje teksta"] = menepopisku;
 
     // Information group
