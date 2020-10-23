@@ -34,7 +34,7 @@ osmba.gpcheck = function (map, baseLayers, overlays, controls, group) {
         chunkProgress: update_progress_bar
     });
     var autoload_lock = false;
-    var photoGuiForm;
+    var photoGuiForm = L.control.photoDbGui();
     var gpref, gpname;
     var openPopup;
 
@@ -298,7 +298,6 @@ osmba.gpcheck = function (map, baseLayers, overlays, controls, group) {
     }
 
     osmba.gpcheck.openForm = function (osmid) {
-        photoGuiForm = L.control.photoDbGui();
         photoGuiForm._map = map;
         photoGuiForm.positionMarkerVisible = false;
 

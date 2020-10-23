@@ -1,4 +1,4 @@
-var OSMBA_APP_VERSION = '0.26';
+var OSMBA_APP_VERSION = '0.27';
 
 var osmba = osmba || {};
 osmba.setMarkerFromParams = setMarkerFromParams;

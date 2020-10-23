@@ -511,7 +511,7 @@ L.Control.PhotoDBGui = L.Control.extend({
 
         }
         //check for DateTime of 1980.1.1 - e.g. badly set up date in camera
-        if (exif.DateTime.search(/^1980:/) == 0 || exif.DateTimeOriginal.search(/^1980:/) == 0) {
+        if ((exif.DateTime && exif.DateTime.search(/^1980:/) == 0) || (exif.DateTimeOriginal && exif.DateTimeOriginal.search(/^1980:/) == 0)) {
           //bad date/time in exif - avoid this photo!
           badExifDateTime(exif.DateTime);
           return;
@@ -594,8 +594,10 @@ L.Control.PhotoDBGui = L.Control.extend({
 
     _hideMarker: function () {
         this._map.off('click', this._mapClicked, this);
-        this._map.removeLayer(this.positionMarker);
-        this.positionMarkerVisible = false;
+        if (this.positionMarkerVisible) {
+            this._map.removeLayer(this.positionMarker);
+            this.positionMarkerVisible = false;
+        }
     },
 
     _updateLatLonLabel: function (lat, lon) {

@@ -6,16 +6,31 @@ osmba.layers = function (map, baseLayers, overlays, controls) {
 
     var devicePixelRatio = window.devicePixelRatio || 1,
         retinaSuffix = devicePixelRatio >= 2 ? '@2x' : '';
-    var osmAttr = '&copy; <a href="https://openstreetmap.org/copyright">OSM</a>'; //abbrevation not recommended on other websites
+    var osmAttr = '&copy; <a href="https://openstreetmap.org/copyright">Přispěvatelé OpenStreetMap</a>'; //abbrevation not recommended on other websites
 
     var thunderforestAPIkey = '00291b657a5d4c91bbacb0ff096e2c25';
-    var mapboxAPIkey = "pk.eyJ1IjoiemJ5Y3oiLCJhIjoiY2owa3hrYjF3MDAwejMzbGM4aDNybnhtdyJ9.8CIw6X6Jvmk2GwCE8Zx8SA";
+    var mapboxAPIkey = "pk.eyJ1IjoiemJ5Y3oiLCJhIjoiY2owa3hrYjF3MDAwejMzbGM4aDNybnhtdyJ9.8CIw6X6Jvmk2GwCE8Zx8SA"; // constrained to referer openstreetmap.cz + devosm.zby.cz
+    var maptilerAPIkey = "aiziPqQPPZidvRMvcFaj";
 
+    var mt_streets = L.tileLayer("https://api.maptiler.com/maps/streets/256/{z}/{x}/{y}" + retinaSuffix + ".png?key=" + maptilerAPIkey, {
+        maxZoom: 22,
+        attribution: osmAttr + ', <a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a>',
+        code: 'g',
+        basic: true
+    });
 
-    var mapbox = L.tileLayer('https://{s}.tiles.mapbox.com/v4/mapbox.streets-basic/{z}/{x}/{y}' + retinaSuffix + '.png?access_token=' + mapboxAPIkey, {
+    var mt_topo= L.tileLayer("https://api.maptiler.com/maps/outdoor/256/{z}/{x}/{y}" + retinaSuffix + ".png?key=" + maptilerAPIkey, {
+        maxZoom: 22,
+        attribution: osmAttr + ', <a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a>',
+        code: 'y',
+    });
+
+    var mapbox = L.tileLayer('https://{s}.tiles.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=' + mapboxAPIkey, {
         maxZoom: 24,
         attribution: osmAttr + ", <a href='https://www.mapbox.com/about/maps/'>Mapbox</a>",
         code: 'x',
+        tileSize: 512,
+        zoomOffset: -1,
     });
 
     var turisticka = L.tileLayer("https://tile.poloha.net/{z}/{x}/{y}.png", {
@@ -32,15 +47,8 @@ osmba.layers = function (map, baseLayers, overlays, controls) {
 
     var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
-        attribution: osmAttr,
+        attribution: osmAttr + ', CC-BY-SA 2.0',
         code: 'd',
-        basic: true
-    });
-
-    var wikimediamap = L.tileLayer("https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}" + retinaSuffix + ".png", {
-        maxZoom: 18,
-        attribution: osmAttr + ', <a href="https://www.mediawiki.org/wiki/Maps">Wikimedia</a>',
-        code: 'w',
         basic: true,
         osmbaDefaultLayer: true,
     });
@@ -131,12 +139,6 @@ osmba.layers = function (map, baseLayers, overlays, controls) {
         code: 'j'
     });
 
-    var metropolis = L.tileLayer("https://api.mapbox.com/styles/v1/severak/cinr478gg00aucam0o6lran4v/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2V2ZXJhayIsImEiOiJjaXQxenM2ZTEwMGIyMnRwZGMwZzF6Y2VsIn0.-uZbcCAI3ABqnbg6h1mrhQ", {
-        maxZoom: 24,
-        attribution: osmAttr + ', <a href=\'https://www.mapbox.com/about/maps/\'>Mapbox</a>, <a href=\'http://severak.svita.cz\'>Severák</a>',
-        code: 'r'
-    });
-
     var spinal = L.tileLayer("https://{s}.tile.thunderforest.com/spinal-map/{z}/{x}/{y}" + retinaSuffix + ".png?apikey=" + thunderforestAPIkey, {
         maxZoom: 22,
         attribution: osmAttr + ', <a href="https://www.thunderforest.com/maps/spinal-map/">Thunderforest</a>',
@@ -191,7 +193,7 @@ osmba.layers = function (map, baseLayers, overlays, controls) {
         opacity: 0.6,
         basic: true
     });
-    
+
     var turistikaOverlay = L.tileLayer("https://tile.poloha.net/kct/{z}/{x}/{y}.png", {
         maxZoom: 20,
         attribution: osmAttr + ', <a href="http://www.poloha.net">poloha.net</a>',
@@ -200,12 +202,15 @@ osmba.layers = function (map, baseLayers, overlays, controls) {
         basic: true
     });
 
-    var ortofotoOverlay = L.tileLayer("https://{s}.tiles.mapbox.com/v4/zbycz.e9b65202/{z}/{x}/{y}" + retinaSuffix + ".png?access_token=" + mapboxAPIkey, {
+    var ortofotoOverlay = L.tileLayer('https://{s}.tiles.mapbox.com/styles/v1/zbycz/ckc50f05a17ww1iqgpsf15tqs/tiles/{z}/{x}/{y}?access_token=' + mapboxAPIkey, {
         maxZoom: 24,
         attribution: osmAttr + ", <a href='https://www.mapbox.com/about/maps/'>Mapbox</a>",
         opacity: 1,
-        code: 'O'
+        code: 'O',
+        tileSize: 512,
+        zoomOffset: -1,
     });
+    
 
     var vrstevniceOverlayUrl = "https://tile.poloha.net/contours/{z}/{x}/{y}.png";
     var vrstevniceOverlayOrtoUrl = "https://tile.poloha.net/contours_ortofoto/{z}/{x}/{y}.png";
@@ -251,12 +256,17 @@ osmba.layers = function (map, baseLayers, overlays, controls) {
         code: 'X'
     });
 
+<<<<<<< HEAD
     var lpisOverlay = L.tileLayer.wms(osmba.fakeHttps + 'eagri.cz/public/app/wms/plpis.fcgi', {
         layers: 'LPIS_FB4,LPIS_FB4_KOD',
+=======
+    var lpisOverlay = L.tileLayer.wms('https://eagri.cz/public/app/wms/public_DPB_PB_OPV.fcgi', {
+        layers: 'DPB_UCINNE,DPB_UCINNE_KOD',
+>>>>>>> d6c122e5d3ad07297fd9e8c16debfba50e580994
         format: 'image/png',
         transparent: true,
         crs: L.CRS.EPSG4326,
-        attribution: " <a href='http://www.eagri.cz.cz'>eagri.cz</a>",
+        attribution: " <a href='https://www.eagri.cz'>eagri.cz</a>",
         code: 'L'
     });
 
@@ -324,7 +334,6 @@ osmba.layers = function (map, baseLayers, overlays, controls) {
     baseLayers["Osnovno"]["OpenTopoMap"] = opentopomap;
     baseLayers["Osnovno"]["Metropolis"] = metropolis;
     baseLayers["Osnovno"]["Manje teksta"] = menepopisku;
-    baseLayers["Osnovno"]["Wikimedia Map"] = wikimediamap;
 
     // Information group
     baseLayers["Informacije"] = {};
