@@ -6,7 +6,7 @@ osmba.layers = function (map, baseLayers, overlays, controls) {
 
     var devicePixelRatio = window.devicePixelRatio || 1,
         retinaSuffix = devicePixelRatio >= 2 ? '@2x' : '';
-    var osmAttr = '&copy; <a href="https://openstreetmap.org/copyright">Přispěvatelé OpenStreetMap</a>'; //abbrevation not recommended on other websites
+    var osmAttr = '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap contributors</a>'; //abbrevation not recommended on other websites
 
     var thunderforestAPIkey = '00291b657a5d4c91bbacb0ff096e2c25';
     var mapboxAPIkey = "pk.eyJ1IjoiemJ5Y3oiLCJhIjoiY2owa3hrYjF3MDAwejMzbGM4aDNybnhtdyJ9.8CIw6X6Jvmk2GwCE8Zx8SA"; // constrained to referer openstreetmap.cz + devosm.zby.cz
