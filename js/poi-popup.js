@@ -428,10 +428,10 @@ osmba.poiPopup.getHtml = function (feature, icon, embedded) {
         + '<div id="thumbnailLoadSpinner" class="text-center"><span class="glyphicon glyphicon-refresh text-info gly-spin"></span><br></div>'
         + '<img id="thumbnailImage" src="" class="center-block"/>'
         + '</a>'
-        + '<div class="margin-top-05"><b>Fotografii poskytl: </b> _autor'
+        + '<div class="margin-top-05"><b>Sliku je dodao/la: </b> _autor'
         + '<span style="margin: 0.5em"/>'
         + ' <a href="'+osmba.photoDbUrl+'?id=_id" target="_blank" class="btn btn-default btn-xs">'
-        + '   <span class="glyphicon glyphicon-pencil" title="upravit"></span> upravit</a>'
+        + '   <span class="glyphicon glyphicon-pencil" title="urediti"></span> urediti</a>'
         + '</div>'
 
     function showGuidepost() {
