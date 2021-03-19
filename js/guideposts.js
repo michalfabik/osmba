@@ -235,7 +235,7 @@ osmba.guideposts = function (map, baseLayers, overlays, controls, group) {
             }
 
             var html_content = "";
-            html_content += "Fotografii poskytl: ";
+            html_content += "Sliku je dodao/la: ";
             html_content += "<a href='" + osmba.photoDbUrl + "?author=" + b.author + "'>" + b.author + "</a>";
             html_content += "<br>";
             html_content += "Uslikano: " + b.created;
@@ -257,7 +257,7 @@ osmba.guideposts = function (map, baseLayers, overlays, controls, group) {
 
             html_content += "<div class='buttons-bar'>";
             html_content += "<a href='" + osmba.photoDbUrl + "?id=" + b.id + "'><button type='button' class='btn btn-default btn-xs'>";
-            html_content += '   <div class="glyphicon glyphicon-pencil"></div> Upravit';
+            html_content += '   <div class="glyphicon glyphicon-pencil"></div> Urediti';
             html_content += '</button></a>';
 
             html_content += "<span class='space-2em'/>";
