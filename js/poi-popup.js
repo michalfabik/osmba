@@ -179,10 +179,10 @@ osmba.poiPopup.getHtml = function (feature, icon, embedded) {
 
         // global flags
         if (k.match(/^wikipedia/)) {
-            // Prefer wikipedia over wikipedia:cs over first one
+            // Prefer wikipedia over wikipedia:bs over first one
             if (k.match(/^wikipedia$/))
                 wikipedia = {k: k, v: v};
-            else if (k.match(/^wikipedia:cs$/) &&
+            else if (k.match(/^wikipedia:bs$/) &&
                 (!wikipedia.k || (wikipedia.k && !wikipedia.k == "wikipedia")))
                 wikipedia = {k: k, v: k.split(":").pop() + ":" + v};
             else if (!wikipedia.k && k.match(/^wikipedia:/))
